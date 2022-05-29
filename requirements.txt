@@ -2,3 +2,4 @@ Django==4.0.4
 django-admin-interface==0.19.1
 django-admin-honeypot==1.1.0
 django-ipware==4.0.2
+python-dotenv==0.20.0
