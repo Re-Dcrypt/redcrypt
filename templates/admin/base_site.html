@@ -113,30 +113,7 @@
 {% if current_lang == 'fa' %}
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v27.2.2/dist/font-face.css" />
 {% endif %}
-<style type="text/css">
-  #nav-sidebar,#changelist,#toolbar,#changelist-search,#changelist-form,#changelist-filter,#main,#id_username,#id_password,#recent-actions-module{
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #212121;
-  }
-  .foldable-apps-ready,.model,.model-profile.row,.actionlist,.module{
-    background-color: #000000;
-  }
-  #content-related .module, #content-related,tr:nth-child(odd), .row-form-errors{
-    background: black;
-  }
-  tr:nth-child(even), .row-form-errors{
-    background: #212121;
-  }
-  .admin-interface #changelist #toolbar {
-    border-top: 1px solid #212121;
-    border-bottom: 1px solid #212121;
-    background: black;
-  }
-  #changelist .actions {
-    background-color: #000000;
-  }
-</style>
+
 {% endblock %}
 
 {% block blockbots %}
@@ -150,6 +127,99 @@
 {% include "admin_interface/favicon.html" %}
 {% include "admin_interface/foldable-apps.html" %}
 {% include "admin_interface/related-modal.html" %}
+<style type="text/css">
+  #nav-sidebar,#changelist,#toolbar,#changelist-search,#changelist-form,#changelist-filter,#main,#id_username,#id_password,#recent-actions-module{
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #212121;
+  }
+  .foldable-apps-ready,.model,.model-profile.row,.actionlist,.module{
+    background-color: #000000;
+  }
+  #content-related .module, #content-related,tr:nth-child(odd), .row-form-errors{
+    background: black;
+    border-bottom: 1px solid #212121;
+  }
+  tr:nth-child(even), .row-form-errors{
+    background: #212121;
+  }
+  .admin-interface #changelist #toolbar {
+    border-top: 1px solid #212121;
+    border-bottom: 1px solid #212121;
+    background: black;
+  }
+  #changelist .actions {
+    background-color: #000000;
+  }
+  #changelist .actions {
+    background: black;
+}
+#changelist .results + .paginator {
+    background: black;
+}
+table thead th{
+    background: #212121;
+    color: white;
+}
+.admin-interface #changelist #changelist-search #searchbar {
+    background: black;
+    color: white;
+    border: none;
+}
+#changelist .actions select {
+    background: black;
+    color: white;
+}
+td, th {
+    padding: 10px;
+    font-size: 14px;
+    background: black;
+}
+#toolbar form input[type=submit],#changelist .actions .button {
+    background: #212121;
+    color: white;
+}
+.admin-interface .list-filter-dropdown select {
+    background-color: #000;
+    color: white;
+  }
+  .admin-interface #main.shifted > #toggle-nav-sidebar {
+    background-color: #000;
+    color: white;
+    border: 1px solid #212121;
+    border-left: none;
+    outline: none;
+    -webkit-box-shadow: 4px 2px 8px -4px #212121;
+    -moz-box-shadow: 4px 2px 8px -4px #212121;
+    box-shadow: 4px 2px 8px -4px #212121;
+}
+.form-row input[type=text], .form-row input[type=password], .form-row input[type=email], .form-row input[type=url], .form-row input[type=tel], .form-row input[type=number], .form-row textarea, .form-row select, .form-row .vTextField {
+    background: black;
+    color: white;
+}
+.form-row {
+    border-bottom: 1px solid #212121;
+}
+.submit-row {
+    background: black;
+    border: none;
+}
+.aligned label,h1 {
+    color: white;
+}
+
+#nav-filter {
+    background: black;
+    color: white;
+    border: solid 1px #212121;
+}
+.admin-interface #changelist .paginator {
+    background: black;
+    border: solid 1px #212121;
+    color: white;
+}
+
+</style>
 {% endblock %}
 
 {% block extrahead %}
