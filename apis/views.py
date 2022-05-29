@@ -9,6 +9,7 @@ def get_profile(request, discord_id):
     "API for getting profile"
     user = Profile.objects.get(discord_id=discord_id)
     dict = {}
+    dict['username'] = user.user.username
     if user.is_banned:
         dict["ban"] = True
         if user.banned_reason:
