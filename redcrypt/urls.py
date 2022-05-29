@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('honeypot/', admin.site.urls),
+    path('api/', include(('apis.urls', 'apis'), namespace='api')),
     path('', include(('url_shortner.urls', 'url_shortner'), namespace='url_shortner'))
 ]

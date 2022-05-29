@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     "User model extended with more fields"
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, blank=True)
     score = models.IntegerField(default=0)
     is_public_name = models.BooleanField(default=False)
@@ -18,3 +18,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    class Meta:
+        verbose_name_plural = "User Progress"
