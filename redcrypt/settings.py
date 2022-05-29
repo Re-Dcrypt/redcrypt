@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'hunt',
     'accounts',
     'extra_settings',
-    'admin_honeypot'
+    'admin_honeypot',
+    'url_shortner'
 ]
 
 MIDDLEWARE = [
