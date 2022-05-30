@@ -21,4 +21,16 @@ class Profile(models.Model):
         return str(self.user)
 
     class Meta:
-        verbose_name_plural = "User Progress"
+        verbose_name_plural = "User Profiles"
+
+class IPs(models.Model):
+    "IP address model for catching cheaters"
+    ip_address = models.CharField(max_length=150)
+    users_from_ip = models.ManyToManyField(User)
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.ip_address)
+
+    class Meta:
+        verbose_name_plural = "IP addresses"
