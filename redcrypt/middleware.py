@@ -1,9 +1,11 @@
-from accounts.models import Profile
+"CustomMiddleware for IP Logging to user profile"
 from ipware import get_client_ip
-import json
+from accounts.models import Profile
 
 
 class CustomMiddleware:
+    "CustomMiddleware for ip logging"
+
     def __init__(self, get_response):
         self.get_response = get_response
 
