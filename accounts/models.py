@@ -15,6 +15,7 @@ class Profile(models.Model):
     is_public_organization = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
     banned_reason = models.CharField(max_length=150, blank=True)
+    ip_address = models.JSONField(default=[""])
 
     def __str__(self):
         return str(self.user)
