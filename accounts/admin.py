@@ -8,7 +8,41 @@ class IPsAdmin(admin.ModelAdmin):
     list_display = [
         'ip_address',
         'count']
+    fields = [
+        ('users_from_ip', 'count'),
+        ('ip_address',)
+    ]
 
 
-admin.site.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    search_fields = ['user__username', 'name', 'discord_id']
+    readonly_fields = ('user',)
+    list_display = [
+        'user',
+        'score',
+        'current_level',
+        'ip_address_count'
+    ]
+    list_filter = ['is_banned', 'ip_address_count', 'current_level']
+    fieldsets = (
+        ('Details',
+            {'fields': [
+                ('user'),
+                ('name', 'is_public_name'),
+                ('organization', 'is_public_organization'),
+                ('discord_id')
+                ]}),
+        ('Hunt',
+            {'fields': [
+                ('score', 'current_level'),
+                ('banned_reason', 'is_banned')
+                ]}),
+        ('IPs',
+            {'fields': [
+                ('ip_address', 'ip_address_count')
+                ]})
+    )
+
+
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(IPs, IPsAdmin)

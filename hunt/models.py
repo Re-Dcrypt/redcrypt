@@ -4,18 +4,24 @@ from django.contrib.auth.models import User
 
 class Question(models.Model):
     "Question Model"
-    unique_name = models.CharField(max_length=255, null=True, blank=True)
+    short_name = models.CharField(max_length=255, null=True, blank=True)
     answer = models.CharField(max_length=255)
     is_custom_template = models.BooleanField(default=False)
     img_url = models.URLField(blank=True, null=True)
     question_text = models.TextField(blank=True, null=True)
     level = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.level}: {self.short_name}"
+
 
 class AdditionalHint(models.Model):
     "Hint for questions"
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     hint_text = models.CharField(max_length=1024)
+
+    def __str__(self):
+        return self.hint_text
 
 
 class LevelTracking(models.Model):

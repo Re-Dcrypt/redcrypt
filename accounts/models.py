@@ -16,12 +16,14 @@ class Profile(models.Model):
     is_banned = models.BooleanField(default=False)
     banned_reason = models.CharField(max_length=150, blank=True)
     ip_address = models.JSONField(default=[""])
+    ip_address_count = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user)
 
     class Meta:
         verbose_name_plural = "User Profiles"
+
 
 class IPs(models.Model):
     "IP address model for catching cheaters"
