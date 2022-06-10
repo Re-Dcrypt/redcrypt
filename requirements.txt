@@ -3,5 +3,6 @@ django-admin-interface==0.19.1
 django-admin-honeypot==1.1.0
 django-ipware==4.0.2
 python-dotenv==0.20.0
-sentry-sdk
-django-extra-settings
+sentry-sdk==1.5.12
+django-extra-settings==0.3.2
+django-allauth==0.51.0

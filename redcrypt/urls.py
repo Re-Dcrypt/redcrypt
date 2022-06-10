@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from hunt.views import index
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('honeypot/', admin.site.urls),
     path('api/', include(('apis.urls', 'apis'), namespace='api')),
-    path('', include(('url_shortner.urls', 'url_shortner'), namespace='url_shortner'))
+    path('', include((
+        'url_shortner.urls', 'url_shortner'),
+        namespace='url_shortner')),
+    path('accounts/', include('allauth.urls')),
+
 ]

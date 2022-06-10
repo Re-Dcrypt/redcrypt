@@ -1,0 +1,38 @@
+<header class="sticky top-0 z-50 text-gray-400 bg-nblue-800 body-font">
+    <div
+      class="container mx-auto flex flex-wrap p-5 mt-0 mb-0 flex-col md:flex-row items-center"
+    >
+      <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+        <a href="#" class="mr-5 text-nblue hover:text-nblue-200">Play</a>
+        <a href="#" class="mr-5 text-nblue hover:text-nblue-200">Leaderboard</a>
+        <a href="#" class="mr-5 text-nblue hover:text-nblue-200">FAQs</a>
+        <a href="#" class="text-nblue hover:text-nblue-200">About</a>
+      </nav>
+      <a href="#" class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0">
+        <span class="ml-3 text-xl xl:block lg:hidden text-nblue hover:text-nblue-200">
+            Re-Dcrypt
+        </span>
+      </a>
+      <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+        <div class="flex justify-center">
+          <a href="{% url 'account_login' %}">
+            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-nblue-200 to-nblue-600 group-hover:from-nblue-200 group-hover:to-nblue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-nblue-800 rounded-md group-hover:bg-opacity-0">
+                    Login
+                </span>
+              </button>
+            </a>
+            <a href="{% url 'account_signup' %}">
+              <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-nblue-200 to-nblue-600 group-hover:from-nblue-200 group-hover:to-nblue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-nblue-800 rounded-md group-hover:bg-opacity-0">
+                    Signup
+                </span>
+              </button>
+            </a>  
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
