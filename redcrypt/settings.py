@@ -79,6 +79,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':  {
+                'profile_tags': 'accounts.templatetags.profile_tags',
+            }
         },
     },
 ]
@@ -116,20 +119,16 @@ SITE_ID = 1
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth."\
-            "password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth."\
-            "password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth."\
-            "password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth."\
-            "password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -141,6 +140,20 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+ACCOUNT_FORMS = {'signup': 'accounts.forms.MyCustomSignupForm'}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+
+ACCOUNT_MAX_EMAIL_ADDRESSES = 1
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+
+LOGIN_REDIRECT_URL = '/profile/'
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 

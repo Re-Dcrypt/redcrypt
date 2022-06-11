@@ -17,6 +17,10 @@ class Profile(models.Model):
     banned_reason = models.CharField(max_length=150, blank=True)
     ip_address = models.JSONField(default=[""])
     ip_address_count = models.IntegerField(default=0)
+    avatar_url = models.CharField(
+        max_length=150,
+        default="https://avatars.dicebear.com/api/pixel-art-neutral/helooooooooooo.svg"
+    )
 
     def __str__(self):
         return str(self.user)

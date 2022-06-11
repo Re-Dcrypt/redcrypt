@@ -1,3 +1,4 @@
+{% load profile_tags %}
 <header class="sticky top-0 text-gray-400 bg-nblue-800 body-font">
   <div
     class="container mx-auto flex flex-wrap p-5 mt-0 mb-0 flex-col md:flex-row items-center"
@@ -17,20 +18,23 @@
       <div class="flex justify-center">
 
 
-            <div class="group relative">
-                <button><img src="https://api.lorem.space/image/face" alt="avatar" class="w-11 h-11 rounded-full mr-3 border border-2 border-nblue-500 lg:-mt-5 lg:-mb-5"></button>
+            <div class="flex group relative z-1">
+              <span class="text-nblue mr-3">{{user.username}}</span>
+                <button class="text-nblue"> <img src="{% avatar user %}" alt="avatar" class="w-11 h-11 rounded-full mr-3 border border-2 border-nblue-500 lg:-mt-5 lg:-mb-5"></button>
                 
-                <nav tabindex="0" class="border border-2 bg-nblue-800 invisible border-nblue-400 rounded w-60 absolute right-0 top-full transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-1">
+                <nav tabindex="0" class="border border-2 bg-nblue-800 invisible border-nblue-400 rounded w-60 absolute right-0 top-full transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-1" style="z-index: 5" id="drop">
                     <ul class="py-1">
                         <li>
-                            <a href="#" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">
-                                Profile
+                            <a href="{% url 'profile' %}" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">
+                                <center>Profile</center>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">
-                                Sign Out
-                            </a>
+                            <!--<a href="{% url 'account_logout' %}" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">-->
+                              <form action="{% url 'account_logout' %}" method="POST">
+                                {% csrf_token %}
+                              <button type="submit" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black w-full ">Sign Out</button>
+                              </form>
                         </li>
                     </ul>
                 </nav>

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from hunt.views import index
+from accounts import views as accounts_views
+
 
 urlpatterns = [
     path('', index, name='index'),
@@ -25,6 +27,11 @@ urlpatterns = [
     path('', include((
         'url_shortner.urls', 'url_shortner'),
         namespace='url_shortner')),
+    path(
+        'accounts/social/connections/',
+        accounts_views.connect, name='connect'),
     path('accounts/', include('allauth.urls')),
+
+    path('profile/', accounts_views.profile, name='profile'),
 
 ]
