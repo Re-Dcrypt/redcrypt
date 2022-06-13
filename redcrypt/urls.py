@@ -24,14 +24,22 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('honeypot/', admin.site.urls),
     path('api/', include(('apis.urls', 'apis'), namespace='api')),
-    path('', include((
-        'url_shortner.urls', 'url_shortner'),
-        namespace='url_shortner')),
+
     path(
         'accounts/social/connections/',
         accounts_views.connect, name='connect'),
     path('accounts/', include('allauth.urls')),
 
     path('profile/', accounts_views.profile, name='profile'),
-
+    path('profile', accounts_views.profile),
+    path(
+        'profile/<str:username>/',
+        accounts_views.public_profile,
+        name='public-profile'),
+    path(
+        'profile/<str:username>',
+        accounts_views.public_profile),
+    path('', include((
+        'url_shortner.urls', 'url_shortner'),
+        namespace='url_shortner')),
 ]

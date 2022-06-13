@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% load profile_tags %}
+{% get_providers as socialaccount_providers %}
+{% get_social_accounts user as accounts %}
+{% block content %}
+<div class="container flex justify-center">
+
+    <div class="rounded lg:w-1/4  md:w-1/4 w-full p-10 mt-16 bg-clip-padding bg-nblue-800 backdrop-filter backdrop-blur-xl bg-opacity-60 border border-nblue mb-10 z-0" style="z-index:0">
+        <center>
+            <img src="{% avatar usern %}" alt="dp" class="rounded-full border border-nblue border-3" style="width:80px;height:80px;margin-top:-80px;">
+            <h1 class="text-nblue text-3xl font-bold mt-4">{{usern.username}}</h1>
+            <p class="justify-between"><button type="button" class="text-white bg-gradient-to-r from-nblue-500 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-7 mr-2 mb-2">Score: {{ profile.score}}</button>
+                <button type="button" class="text-white bg-gradient-to-r from-nblue-500 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-7 mr-2 mb-2">Current Level: {{ profile.current_level}}</button>
+            </p>
+            {% if profile.is_public_name %}
+            <p tabindex="0" class="focus:outline-none text-white text-lg p-5">
+                <label for="name" class="text-nblue text-lg"><b>Name: </b></label> {{ profile.name }}
+            </p>
+            {% endif %}
+            {% if profile.is_public_organization %}
+            <p tabindex="0" class="focus:outline-none text-white text-lg pb-5">
+                <label for="School/Organization" class="text-nblue text-lg"><b>School/Organization: </b></label> {{profile.organization}}
+            </p>
+            {% endif %}
+
+    </div>
+</div>
+
+{% endblock content %}
