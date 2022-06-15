@@ -132,4 +132,4 @@ temp_test.py
 .vscode/
 node_modules/
 staticfiles/
-static/CACHE/
+static/

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% load profile_tags %}
+{% get_providers as socialaccount_providers %}
+{% get_social_accounts user as accounts %}
+{% block style %}
+<style>
+.toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    right: 0;
+    border-color: #68D391;
+}
+.toggle-checkbox:checked + .toggle-label {
+    @apply: bg-green-400;
+    background-color: #68D391;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container justify-center flex">
+
+    <div class="rounded lg:w-3/4  md:w-3/4 w-full p-10 mt-16 bg-clip-padding bg-nblue-800 backdrop-filter backdrop-blur-xl bg-opacity-60 border border-nblue mb-10 z-0" style="z-index:0">
+        
+            <img src="{% avatar user %}" alt="dp" class="rounded-full border border-nblue border-3" style="width:80px;height:80px;margin-top:-80px;">
+            <h1 class="text-nblue text-3xl font-bold mt-4 mb-6">Edit Profile</h1>
+            <form action="{% url 'save_profile' %}" method="post" class="justify-start">
+                {% csrf_token %}
+            <!--<div class="relative flex justify-center items-center group p-2 ">-->
+            <label for="username" class="text-nblue mr-6 justify-start">Username:</label>
+            <input type="text" id="username" class="mb-2 bg-nblue-700 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 cursor-not-allowed" value="{{user.username}}" disabled>
+            <!--</div>-->
+            <br>
+            <label for="email" class="text-nblue mr-6 justify-start">Email:</label>
+            <input type="text" id="email" class="mb-2 bg-nblue-700 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 cursor-not-allowed" value="{{user.email}}" disabled>
+           <br>
+
+                <label for="name" class="p-2 text-nblue mr-3 place-self-start mb-6"><b>Name:</b></label>
+                <input type="text" id="name" class="mb-2 bg-nblue-700 border border-nblue text-nblue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" name="name" value="{{profile.name}}">
+                <br>
+                <span class="relative inline-flex flex justify-between items-center group p-2 text-nblue ml-2"> Make it public </span>
+                <label for="is_name_public" class="ml-3 content-center inline-flex relative items-center cursor-pointer">
+                <input type="checkbox" id="is_name_public" class="inline-flex sr-only peer" name="is_name_public" {% if profile.is_public_name %}checked{% endif %}>
+                <div class="w-11 h-6 inline-flex relative content-center items-center text-nblue bg-nblue-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-nblue"></div>
+                </label><br>                  
+
+                    <label for="organization" class="p-2 text-nblue mr-3 place-self-start"><b>School/Organization:</b></label>
+                    <input type="text" id="organization" class="mb-2 bg-nblue-700 border border-nblue text-nblue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" name="organization" value="{{profile.organization}}">
+                    <br>
+                    <span class="relative flex inline-flex justify-between items-center group p-2 text-nblue ml-2"> Make it public </span>
+                        <label for="is_organization_public" class="ml-3 content-center inline-flex relative items-center cursor-pointer">
+                        <input type="checkbox" id="is_organization_public" class="sr-only peer" name="is_organization_public" {% if profile.is_public_organization %}checked{% endif %}>
+                        <div class="mb-6 w-11 h-6 inline-flex relative content-center items-center text-nblue bg-nblue-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-nblue"></div>
+                        </label>                  
+                    
+                    </tr>
+                   
+
+        <br>
+        <a href="{% url 'profile' %}"><button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Cancel</button></a>
+        <button type="submit" class="text-white bg-gradient-to-r from-nblue-200 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Save</button>
+        </center></form>
+    </div>
+</div>
+
+{% endblock content %}

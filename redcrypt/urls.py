@@ -32,6 +32,11 @@ urlpatterns = [
 
     path('profile/', accounts_views.profile, name='profile'),
     path('profile', accounts_views.profile),
+    path('profile/edit/', accounts_views.edit_profile, name='edit_profile'),
+    path(
+        'profile/edit/save_profile',
+        accounts_views.save_profile,
+        name='save_profile'),
     path(
         'profile/<str:username>/',
         accounts_views.public_profile,
