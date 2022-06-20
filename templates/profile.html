@@ -19,9 +19,19 @@
                 <label for="name" class="text-nblue text-lg"><b>Name: </b></label> {{ profile.name }}
             </p>
             <p tabindex="0" class="focus:outline-none text-white text-lg pb-5">
-                <label for="name" class="text-nblue text-lg"><b>Email: </b></label> {{user.email}} {% if user.emailaddress_set.all.0.verified %}<span data-tooltip-target="tooltip" data-tooltip-placement="right">✅</span>
+                <label for="name" class="text-nblue text-lg"><b>Email: </b></label> {{user.email}} {% if user.emailaddress_set.all.0.verified %}<span data-tooltip-target="tooltip" data-tooltip-placement="right">
+                    <span class="material-icons text-green-400">verified</span>
+                </span>
                 <div id="tooltip" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                     Verified
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                {% else %}
+                <span data-tooltip-target="tooltip" data-tooltip-placement="right">
+                    <span class="material-icons text-yellow-400">warning</span>
+                </span>
+                <div id="tooltip" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    Email Not Verified
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 {% endif %}
