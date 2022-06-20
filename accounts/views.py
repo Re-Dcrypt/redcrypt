@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from allauth.account.signals import user_signed_up
+from allauth.account.utils import send_email_confirmation
 
 
 @login_required
@@ -93,6 +94,15 @@ def connect(request):
     profile.save()
     return redirect('profile')
 
+
+@login_required
+def send_confirmation_email(request):
+    send_email_confirmation(request, request.user)
+    return redirect('verification-sent')
+
+@login_required
+def verification_sent(request):
+    return render(request, 'verification_sent.html')
 
 @receiver(user_signed_up)
 def send_discord_webhook(sender, **kwargs):

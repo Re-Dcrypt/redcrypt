@@ -19,7 +19,12 @@
                 <label for="name" class="text-nblue text-lg"><b>Name: </b></label> {{ profile.name }}
             </p>
             <p tabindex="0" class="focus:outline-none text-white text-lg pb-5">
-                <label for="name" class="text-nblue text-lg"><b>Email: </b></label> {{user.email}}
+                <label for="name" class="text-nblue text-lg"><b>Email: </b></label> {{user.email}} {% if user.emailaddress_set.all.0.verified %}<span data-tooltip-target="tooltip" data-tooltip-placement="right">✅</span>
+                <div id="tooltip" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    Verified
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                {% endif %}
             </p>
             <p tabindex="0" class="focus:outline-none text-white text-lg pb-5">
                 <label for="School/Organization" class="text-nblue text-lg"><b>School/Organization: </b></label> {{profile.organization}}
@@ -54,6 +59,13 @@
                 {% csrf_token %}
                 <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Logout</button>
             </form>
+            {% if user.emailaddress_set.all.0.verified %}
+            {% else%}
+            <form action="{% url 'send_confirmation_email' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Send Verification Email</button>
+            </form>
+            {% endif %}
         </center>
     </div>
 

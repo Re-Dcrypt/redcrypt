@@ -44,6 +44,14 @@ urlpatterns = [
     path(
         'profile/<str:username>',
         accounts_views.public_profile),
+    path(
+        'send_confirmation_email',
+        accounts_views.send_confirmation_email,
+        name='send_confirmation_email'),
+    path(
+        'verification-sent',
+        accounts_views.verification_sent,
+        name='verification-sent'),
     path('', include((
         'url_shortner.urls', 'url_shortner'),
         namespace='url_shortner')),

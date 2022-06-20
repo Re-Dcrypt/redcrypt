@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'accounts',
     'extra_settings',
     'admin_honeypot',
-    'url_shortner'
+    'url_shortner',
 ]
 
 MIDDLEWARE = [
@@ -119,16 +119,20 @@ SITE_ID = 1
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -143,12 +147,10 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_FORMS = {'signup': 'accounts.forms.MyCustomSignupForm'}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-
 ACCOUNT_MAX_EMAIL_ADDRESSES = 1
 
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
@@ -177,3 +179,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-pulse.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = "admin@redcrypt.ml"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "Re-Dcrypt - "
+ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 600
+SOCIALACCOUNT_AUTO_SIGNUP = False

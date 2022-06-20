@@ -1,7 +1,13 @@
 "Django Models"
+import json
 from django.db import models
 from django.contrib.auth.models import User
-
+from allauth.account.signals import user_signed_up
+from django.dispatch import receiver
+import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Profile(models.Model):
     "User model extended with more fields"
@@ -40,3 +46,34 @@ class IPs(models.Model):
 
     class Meta:
         verbose_name_plural = "IP addresses"
+
+
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    profile = Profile.objects.get(user=user)
+    "Send  discord webhook after user signup"
+    name = profile.name if profile.name else "None"
+    organization = profile.organization if profile.organization else "None"
+    json_data = {"content": "New Signup", "embeds": [{
+        "title": "New User Signup", "color": 53970, "fields": [
+            {
+                "name": "Username",
+                "value": str(user.username)
+            },
+            {
+                "name": "Name",
+                "value": name
+            },
+            {
+                "name": "Email",
+                "value": str(user.email)
+            },
+            {
+                "name": "School/Organisation",
+                "value": organization
+            }]}]}
+    print("here", json_data)
+    url = os.getenv("DISCORD_LOGGING_WEBHOOK")
+    print(url)
+    response = requests.post(url, json=json_data)
+    print(response.status_code)
