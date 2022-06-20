@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-p6pm-#vvtm9z0we_%98c-ji9qb$t)mqq7px3-mi+jg+yi9"
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1']
 
 # Application definition
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'extra_settings',
     'admin_honeypot',
     'url_shortner',
+    'hcaptcha'
 ]
 
 MIDDLEWARE = [
@@ -190,3 +191,6 @@ DEFAULT_FROM_EMAIL = "admin@redcrypt.ml"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Re-Dcrypt - "
 ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 600
 SOCIALACCOUNT_AUTO_SIGNUP = False
+
+HCAPTCHA_SITEKEY = os.getenv('HCAPTCHA_SITEKEY')
+HCAPTCHA_SECRET = os.getenv('HCAPTCHA_SECRET')

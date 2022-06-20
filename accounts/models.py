@@ -72,8 +72,4 @@ def user_signed_up_(request, user, **kwargs):
                 "name": "School/Organisation",
                 "value": organization
             }]}]}
-    print("here", json_data)
     url = os.getenv("DISCORD_LOGGING_WEBHOOK")
-    print(url)
-    response = requests.post(url, json=json_data)
-    print(response.status_code)

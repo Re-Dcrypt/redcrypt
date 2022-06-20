@@ -1,6 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from accounts.models import Profile
+from hcaptcha.fields import hCaptchaField
 
 
 class MyCustomSignupForm(SignupForm):
@@ -9,6 +10,16 @@ class MyCustomSignupForm(SignupForm):
         required=False,
         label='School/Organization [Optional]'
         )
+    hcaptcha = hCaptchaField(theme='dark')
+
+    field_order = [
+        'name',
+        'organization',
+        'username',
+        'email',
+        'password1',
+        'password2',
+        'hcaptcha']
 
     def save(self, request):
         # Ensure you call the parent class's save.
