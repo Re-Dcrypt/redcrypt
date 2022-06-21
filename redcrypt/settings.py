@@ -145,7 +145,9 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-ACCOUNT_FORMS = {'signup': 'accounts.forms.MyCustomSignupForm'}
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.MyCustomSignupForm',
+    'reset_password': 'accounts.forms.CustomForgetPassword',}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -187,7 +189,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = "admin@redcrypt.ml"
+DEFAULT_FROM_EMAIL = "Re-Dcrypt <admin@redcrypt.ml>"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Re-Dcrypt - "
 ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 600
 SOCIALACCOUNT_AUTO_SIGNUP = False

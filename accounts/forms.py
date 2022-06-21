@@ -1,5 +1,5 @@
 from django import forms
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, ResetPasswordForm
 from accounts.models import Profile
 from hcaptcha.fields import hCaptchaField
 
@@ -37,3 +37,7 @@ class MyCustomSignupForm(SignupForm):
 
         # You must return the original result.
         return user
+
+
+class CustomForgetPassword(ResetPasswordForm):
+    hcaptcha = hCaptchaField(theme='dark')
