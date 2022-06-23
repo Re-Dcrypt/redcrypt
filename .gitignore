@@ -133,3 +133,4 @@ temp_test.py
 node_modules/
 staticfiles/
 static/
+.idea/

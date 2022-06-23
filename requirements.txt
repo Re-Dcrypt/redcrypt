@@ -7,3 +7,4 @@ sentry-sdk==1.5.12
 django-extra-settings==0.3.2
 django-allauth==0.51.0
 django-hCaptcha==0.2.0
+whitenoise==6.2.0

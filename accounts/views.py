@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from allauth.account.signals import user_signed_up
 from allauth.account.utils import send_email_confirmation
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required
@@ -76,13 +77,15 @@ def save_profile(request):
 
 
 def public_profile(request, username):
-    usern = User.objects.get(username=username)
-    print(usern)
-    profile = Profile.objects.get(user=usern)
-    return render(
-        request,
-        'public_profile.html',
-        {'usern': usern, 'profile': profile})
+    try:
+        usern = User.objects.get(username=username)
+        profile = Profile.objects.get(user=usern)
+        return render(
+            request,
+            'public_profile.html',
+            {'usern': usern, 'profile': profile})
+    except ObjectDoesNotExist:
+        return render(request, '404.html', status=404)
 
 
 @login_required

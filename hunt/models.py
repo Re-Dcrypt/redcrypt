@@ -10,6 +10,7 @@ class Question(models.Model):
     img_url = models.URLField(blank=True, null=True)
     question_text = models.TextField(blank=True, null=True)
     level = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.level}: {self.short_name}"
