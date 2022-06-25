@@ -15,6 +15,8 @@ import os
 from dotenv import load_dotenv
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,7 +55,8 @@ INSTALLED_APPS = [
     'extra_settings',
     'admin_honeypot',
     'url_shortner',
-    'hcaptcha'
+    'hcaptcha',
+    'maintenance_mode',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'redcrypt.middleware.CustomMiddleware'
+    'redcrypt.middleware.CustomMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware'
 ]
 
 ROOT_URLCONF = 'redcrypt.urls'
@@ -199,3 +203,9 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 
 HCAPTCHA_SITEKEY = os.getenv('HCAPTCHA_SITEKEY')
 HCAPTCHA_SECRET = os.getenv('HCAPTCHA_SECRET')
+
+if os.getenv("MAINTENANCE_MODE").lower() == "true":
+    MAINTENANCE_MODE = True
+else:
+    MAINTENANCE_MODE = False
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
