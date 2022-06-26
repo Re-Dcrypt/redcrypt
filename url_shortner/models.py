@@ -5,7 +5,9 @@ from django.db import models
 
 class UrlShortner(models.Model):
     short_url = models.CharField(max_length=150)
-    full_url = models.CharField(max_length=999999)
+    is_content = models.BooleanField(default=False)
+    content = models.CharField(max_length=999999, blank=True, null=True)
+    full_url = models.CharField(max_length=999999, blank=True, null=True)
     click_counts = models.IntegerField(default=0)
 
     def __str__(self):

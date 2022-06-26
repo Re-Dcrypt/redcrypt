@@ -10,5 +10,11 @@ def redirect_url(request, slug):
         url_details = UrlShortner.objects.get(short_url=slug)
         url_details.click_counts += 1
         url_details.save()
+        if url_details.is_content:
+            return render(
+                request,
+                'shortner.html',
+                {'content': url_details.content,
+                 'urlname': slug})
         return redirect(url_details.full_url)
     return render(request, '404.html', status=404)
