@@ -183,6 +183,7 @@ APPEND_SLASH = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 WHITENOISE_MANIFEST_STRICT = False
+WHITENOISE_ROOT = "static"
 STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -214,7 +215,7 @@ else:
     MAINTENANCE_MODE = False
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
 
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static', 'serviceworker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 PWA_APP_NAME = 'Re-Dcrypt'
 PWA_APP_DESCRIPTION = 'Re-Dcrypt Cryptic Hunt.'
 PWA_APP_THEME_COLOR = '#00d2d2'
@@ -226,6 +227,18 @@ PWA_APP_HOME_PATH = '/home'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 
 PWA_APP_ICONS = [
+    {
+        'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png'
+    },
+    {
+        'src': 'https://redcrypt-static.pages.dev/icon-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png'
+    }
+]
+PWA_APP_ICONS_APPLE = [
     {
         'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
         'sizes': '192x192',
