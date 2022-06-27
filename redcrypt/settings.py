@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'url_shortner',
     'hcaptcha',
     'maintenance_mode',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -212,3 +213,28 @@ if os.getenv("MAINTENANCE_MODE").lower() == "true":
 else:
     MAINTENANCE_MODE = False
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static', 'serviceworker.js')
+PWA_APP_NAME = 'Re-Dcrypt'
+PWA_APP_DESCRIPTION = 'Re-Dcrypt Cryptic Hunt.'
+PWA_APP_THEME_COLOR = '#00d2d2'
+PWA_APP_BACKGROUND_COLOR = '#002a2a'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_START_URL = '/home'
+PWA_APP_HOME_PATH = '/home'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+
+PWA_APP_ICONS = [
+    {
+        'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png'
+    },
+    {
+        'src': 'https://redcrypt-static.pages.dev/icon-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png'
+    }
+]
+PWA_APP_LANG = 'en-US'
