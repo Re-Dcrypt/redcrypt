@@ -25,41 +25,36 @@
             }
           }
         }
-      </script>
-      <script src="https://cdn.blobity.dev/by.js"></script>
-      <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
-      <style>
-        header{
-            -webkit-box-shadow: 0px 20px 20px #00D2D2;
-            -moz-box-shadow:    0px 20px 20px #00D2D2;
-            box-shadow:         0px 20px 20px #00D2D2;}
-        body {
-            background-image: url('https://redcrypt-static.pages.dev/low-poly-grid-haikei.svg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            }
-        /* Track */
-        ::-webkit-scrollbar-track {
-          background: #002A2A;
+    </script>
+    <script src="https://cdn.blobity.dev/by.js?noAutoStart"></script>
+    <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      header{
+          -webkit-box-shadow: 0px 20px 20px #00D2D2;
+          -moz-box-shadow:    0px 20px 20px #00D2D2;
+          box-shadow:         0px 20px 20px #00D2D2;}
+      body {
+          background-image: url('https://redcrypt-static.pages.dev/low-poly-grid-haikei.svg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          }
+      .install {
+        display: none;
+      }
+      @media all and (display-mode: standalone) {
+        .install{
+          display: none;
         }
-        
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-          background: #009A9A;
-          border-radius: 10px;
-        }
-        
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-          background: #00D2D2;
-        }
-      </style>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      {% block head %}{% endblock head %}
+      }
+    </style>
+    <link rel="stylesheet" href="https://static.redcrypt.ml/scrollbar.css">
+    {% block head %}{% endblock head %}
 </head>
 <body class="font-Orbitron">
     {% if user.is_authenticated %}
@@ -78,15 +73,58 @@
         <span class="sr-only">Close</span>
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
       </button>
-    </div></div></center> 
+    </div>
+</div>
+  <div id="custom_toast" class="hidden fixed bottom-0 left-1/4 p-4 mb-4 text-sm rounded-lg bg-nblue-800 text-nblue border border-nblue  w-1/2">
+  </div>
+  
+  </center> 
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
 <script>
+  function showToast(message) {
+    let toast = document.getElementById('custom_toast');
+    toast.innerHTML = message;
+    toast.classList.remove('hidden');
+    
+    setTimeout(function () {
+        toast.classList.add('hidden');
+    }, 2000);
+}
+
   let userAgent = navigator.userAgent;
   if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
     var sf_alert = document.querySelector("#safari_alert")
 
     sf_alert.classList.remove("hidden");
    }
+
+   let deferredPrompt;
+   window.addEventListener('beforeinstallprompt', function(e) {
+       deferredPrompt = e;
+   });
+   const installApp = document.getElementById('installapp');
+
+    installApp.addEventListener('click', async () => {
+        console.log(deferredPrompt)
+        if (deferredPrompt !== undefined) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredPrompt = undefined;
+            }
+        } else {
+          showToast('Re-Dcrypt App is already installed.')
+        }
+    });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      $('.install').show();
+      deferredPrompt = e;
+    });
+
+</script>
+<script>
+  const options = { color: 'rgb(0, 210, 210)',zIndex: '-1' };
+  new Blobity(options);
 </script>
 </body>
 </html>

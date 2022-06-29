@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hunt.views import index, home
+from hunt.views import index, offline
 from accounts import views as accounts_views
 
 
 urlpatterns = [
     path('', index, name='index'),
     path('', include('pwa1.urls')),
-    path('home', home, name='home'),
-    path('home/', home, name='home'),
+    path('offline/', offline, name="offline"),
+    path('offline', offline, name="offline"),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('honeypot/', admin.site.urls),
     path('api/', include(('apis.urls', 'apis'), namespace='api')),

@@ -222,10 +222,10 @@ PWA_APP_THEME_COLOR = '#00d2d2'
 PWA_APP_BACKGROUND_COLOR = '#002a2a'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
-PWA_APP_START_URL = '/home'
-PWA_APP_HOME_PATH = '/home'
+PWA_APP_START_URL = '/'
+PWA_APP_HOME_PATH = '/'
 PWA_APP_STATUS_BAR_COLOR = 'default'
-
+PWA_APP_DEBUG_MODE = False
 PWA_APP_ICONS = [
     {
         'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
