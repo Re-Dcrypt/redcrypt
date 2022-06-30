@@ -13,11 +13,13 @@ To deploy this project
     `python manage.py migrate`
 4.  Create superuser
     `python manage.py createsuperuser`
-5.  Load Admin panel customization data
+5.  Collect Static
+    `python manage.py collectstatic`
+6.  Load Admin panel customization data
     `python manage.py loaddata data.json`
-6.  Run server
+7.  Run server
     `python manage.py runserver`
-7. Visit Admin Panel at:
+8. Visit Admin Panel at:
     http://127.0.0.1:8000/honeypot/
 
 ## Environment Variables
@@ -28,6 +30,17 @@ To run this project, you will need to add the following environment variables to
 
 `SENTRY_DSN`
 
+`EMAIL_HOST_USER`
+
+`EMAIL_HOST_PASSWORD`
+
+`DISCORD_LOGGING_WEBHOOK`
+
+`HCAPTCHA_SITEKEY`
+
+`HCAPTCHA_SECRET`
+
+`MAINTENANCE_MODE`
 
 ## Tech Stack
 
