@@ -33,6 +33,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1']
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -182,7 +185,7 @@ APPEND_SLASH = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-WHITENOISE_MANIFEST_STRICT = False
+WHITENOISE_MANIFEST_STRICT = True
 WHITENOISE_ROOT = "static"
 STATIC_URL = 'static/'
 
@@ -228,24 +231,24 @@ PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_DEBUG_MODE = False
 PWA_APP_ICONS = [
     {
-        'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
+        'src': '/icons/maskable_icon_x192.png',
         'sizes': '192x192',
         'type': 'image/png'
     },
     {
-        'src': 'https://redcrypt-static.pages.dev/icon-512x512.png',
+        'src': '/icons/maskable_icon_x512.png',
         'sizes': '512x512',
         'type': 'image/png'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
-        'src': 'https://redcrypt-static.pages.dev/icon-192x192.png',
+        'src': '/icons/maskable_icon_x192.png',
         'sizes': '192x192',
         'type': 'image/png'
     },
     {
-        'src': 'https://redcrypt-static.pages.dev/icon-512x512.png',
+        'src': '/icons/maskable_icon_x512.png',
         'sizes': '512x512',
         'type': 'image/png'
     }

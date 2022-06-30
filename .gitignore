@@ -133,3 +133,7 @@ temp_test.py
 node_modules/
 staticfiles/
 .idea/
+
+*.pem
+*.crt
+*.key

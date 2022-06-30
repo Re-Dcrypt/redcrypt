@@ -3,8 +3,6 @@ var filesToCache = [
     '/offline',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png',
-    'https://redcrypt-static.pages.dev/icon-512x512.png ',
-    'https://redcrypt-static.pages.dev/low-poly-grid-haikei.svg',
 ];
 
 // Cache on install
