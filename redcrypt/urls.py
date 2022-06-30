@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hunt.views import index, offline
+from hunt.views import index, offline, play, check_ans
 from accounts import views as accounts_views
 
 
@@ -27,7 +27,6 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('honeypot/', admin.site.urls),
     path('api/', include(('apis.urls', 'apis'), namespace='api')),
-
     path(
         'accounts/social/connections/',
         accounts_views.connect, name='connect'),
@@ -55,6 +54,9 @@ urlpatterns = [
         'verification-sent',
         accounts_views.verification_sent,
         name='verification-sent'),
+    path('play/', play, name='play'),
+    path('play', play),
+    path('check/', check_ans, name='check_ans'),
     path('', include((
         'url_shortner.urls', 'url_shortner'),
         namespace='url_shortner')),

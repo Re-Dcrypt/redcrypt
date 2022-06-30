@@ -28,7 +28,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ('Details',
             {'fields': [
                 ('short_name', 'is_custom_template'),
-                ('level',),
+                ('level', 'points'),
             ]}),
         ('Question',
             {'fields': [

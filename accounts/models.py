@@ -9,6 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+
 class Profile(models.Model):
     "User model extended with more fields"
     user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
