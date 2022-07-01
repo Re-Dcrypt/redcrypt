@@ -2,13 +2,14 @@
 {% load pwa %}
 <!DOCTYPE html>
 
-<html class="no-js" lang="">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>{% block head_title %}{% endblock %} |  Re-Dcrypt</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Cryptic Hunt">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico"/>
     {% progressive_web_app_meta %}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,6 +53,20 @@
           display: none;
         }
       }
+      #custom_toast{
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s;
+        position: fixed;
+        bottom: -999px;
+        left: 25%;
+      }
+      #custom_toast.show{
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.5s;
+        bottom: 10px;
+      }
     </style>
     <link rel="stylesheet" href="https://static.redcrypt.ml/scrollbar.css">
     {% block head %}{% endblock head %}
@@ -64,7 +79,7 @@
 {% endif %}
     <center>{% block content %}{% endblock content %} 
 
-  <div id="custom_toast" class="hidden fixed bottom-0 left-1/4 p-4 mb-4 text-sm rounded-lg bg-nblue-800 text-nblue border border-nblue  w-1/2">
+  <div id="custom_toast" class="fixed bottom-0 left-1/4 p-4 mb-4 text-sm rounded-lg bg-nblue-800 text-nblue border border-nblue  w-1/2">
   </div>
   
   </center> 
@@ -73,10 +88,10 @@
   function showToast(message,time) {
     let toast = document.getElementById('custom_toast');
     toast.innerHTML = message;
-    toast.classList.remove('hidden');
+    toast.classList.add('show');
     
     setTimeout(function () {
-        toast.classList.add('hidden');
+        toast.classList.remove('show');
     }, time);
 }
 

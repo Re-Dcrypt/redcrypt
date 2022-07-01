@@ -3,6 +3,7 @@ var filesToCache = [
     '/offline',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png',
+    '/offline.svg',
 ];
 
 // Cache on install

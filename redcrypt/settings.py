@@ -233,24 +233,40 @@ PWA_APP_ICONS = [
     {
         'src': '/icons/maskable_icon_x192.png',
         'sizes': '192x192',
-        'type': 'image/png'
+        'type': 'image/png',
+        "purpose": "maskable"
+    },
+    {
+        'src': '/icons/maskable_icon_x192.png',
+        'sizes': '192x192',
+        'type': 'image/png',
+        "purpose": "any"
     },
     {
         'src': '/icons/maskable_icon_x512.png',
         'sizes': '512x512',
-        'type': 'image/png'
+        'type': 'image/png',
+        "purpose": "maskable"
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
         'src': '/icons/maskable_icon_x192.png',
         'sizes': '192x192',
-        'type': 'image/png'
+        'type': 'image/png',
+        "purpose": "maskable",
+    },
+    {
+        'src': '/icons/maskable_icon_x192.png',
+        'sizes': '192x192',
+        'type': 'image/png',
+        "purpose": "any"
     },
     {
         'src': '/icons/maskable_icon_x512.png',
         'sizes': '512x512',
-        'type': 'image/png'
+        'type': 'image/png',
+        "purpose": "maskable"
     }
 ]
 PWA_APP_LANG = 'en-US'
