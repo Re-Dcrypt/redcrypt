@@ -60,4 +60,9 @@ def check_ans(request):
 
 def leaderboard(request):
     profiles = Profile.objects.all().order_by('-score', 'last_completed_time')
-    return render(request, 'leaderboard.html', {'players': profiles})
+    user_profile = Profile.objects.get(user=request.user)
+    above_players = Profile.objects.filter(score__gt=user_profile.score) | Profile.objects.filter(score=user_profile.score, last_completed_time__lt=user_profile.last_completed_time)
+    above = above_players.count()
+    return render(request, 'leaderboard.html', {
+        'players': profiles,
+        'rank': above+1})

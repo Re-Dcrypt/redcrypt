@@ -13,6 +13,7 @@
             <h1 class="text-nblue text-3xl font-bold mt-4">{{usern.username}}</h1>
             <p class="justify-between"><button type="button" class="text-white bg-gradient-to-r from-nblue-500 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-7 mr-2 mb-2">Score: {{ profile.score}}</button>
                 <button type="button" class="text-white bg-gradient-to-r from-nblue-500 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-7 mr-2 mb-2">Current Level: {{ profile.current_level}}</button>
+                <button type="button" class="text-white bg-gradient-to-r from-nblue-500 to-nblue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-7 mr-2 mb-2">Rank: {{ rank }}</button>
             </p>
             {% if profile.is_public_name %}
             <p tabindex="0" class="focus:outline-none text-white text-lg p-5">

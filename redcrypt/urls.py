@@ -56,8 +56,8 @@ urlpatterns = [
         name='verification-sent'),
     path('play/', play, name='play'),
     path('play', play),
-    path('leaderboard/',leaderboard, name='leaderboard'),
-    path('leaderboard',leaderboard,),
+    path('leaderboard/', leaderboard, name='leaderboard'),
+    path('leaderboard', leaderboard,),
     path('check/', check_ans, name='check_ans'),
     path('', include((
         'url_shortner.urls', 'url_shortner'),

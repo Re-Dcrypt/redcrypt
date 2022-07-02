@@ -1,20 +1,19 @@
-from django.dispatch import receiver
 from django.shortcuts import redirect, render
 from accounts.models import Profile
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from allauth.account.signals import user_signed_up
 from allauth.account.utils import send_email_confirmation
 from django.core.exceptions import ObjectDoesNotExist
-
 
 @login_required
 def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     k = SocialAccount.objects.filter(user=request.user)
+    above_players = Profile.objects.filter(score__gt=profile.score) | Profile.objects.filter(score=profile.score, last_completed_time__lt=profile.last_completed_time)
+    above = above_players.count()
     if len(k) > 0:
         connected = True
         username = f"{k[0].extra_data['username']}#{k[0].extra_data['discriminator']}"
@@ -34,6 +33,7 @@ def profile(request):
             'connected': connected,
             'discord': username,
             'toast': toast,
+            'rank': above+1,
         })
 
 
@@ -80,10 +80,12 @@ def public_profile(request, username):
     try:
         usern = User.objects.get(username=username)
         profile = Profile.objects.get(user=usern)
+        above_players = Profile.objects.filter(score__gt=profile.score) | Profile.objects.filter(score=profile.score, last_completed_time__lt=profile.last_completed_time)
+        above = above_players.count()
         return render(
             request,
             'public_profile.html',
-            {'usern': usern, 'profile': profile})
+            {'usern': usern, 'profile': profile, 'rank': above+1})
     except ObjectDoesNotExist:
         return render(request, '404.html', status=404)
 
@@ -103,10 +105,7 @@ def send_confirmation_email(request):
     send_email_confirmation(request, request.user)
     return redirect('verification-sent')
 
+
 @login_required
 def verification_sent(request):
     return render(request, 'verification_sent.html')
-
-@receiver(user_signed_up)
-def send_discord_webhook(sender, **kwargs):
-    pass

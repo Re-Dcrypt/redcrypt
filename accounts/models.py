@@ -1,5 +1,4 @@
 "Django Models"
-import json
 from django.db import models
 from django.contrib.auth.models import User
 from allauth.account.signals import user_signed_up
@@ -75,3 +74,4 @@ def user_signed_up_(request, user, **kwargs):
                 "value": organization
             }]}]}
     url = os.getenv("DISCORD_LOGGING_WEBHOOK")
+    requests.post(url, json=json_data)

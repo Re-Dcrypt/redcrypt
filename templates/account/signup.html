@@ -13,7 +13,10 @@ label{
 label[for="id_hcaptcha"]{
   display:none;
 }
-input,button#submit{
+#id_hcaptcha{
+  margin-top:20px;
+}
+input,input#id_name,input#id_organization,input#id_username,input#id_email,input#id_password1,input#id_password2,button#submit{
     border: 2px solid #00D2D2;
     border-radius: 5px;
     placeholder-color: #00D2D2;
@@ -44,7 +47,7 @@ hr{
   border-top: 2px solid #00D2D2;
 }
 </style>
-{% endblock%}
+{% endblock %}
 {% block content %}
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
@@ -57,7 +60,6 @@ hr{
         </div>
 
         {{ form.as_p }}</center>
-        <!--<input type="hidden" name="{{ redirect_field_name }}" value="" />-->
         <div class="mt-8">
             <button role="button" id="submit" class="border border-nblue focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none rounded hover:bg-nblue-500 hover:text-black py-4 w-full">Sign Up</button>
         </div>
