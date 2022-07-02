@@ -16,6 +16,7 @@ class AnswerAttemptAdmin(admin.ModelAdmin):
 class LevelTrackingAdmin(admin.ModelAdmin):
     readonly_fields = ('time',)
     list_filter = ('level', 'user')
+    list_display = ['user', 'level']
 
 
 class QuestionAdmin(admin.ModelAdmin):
