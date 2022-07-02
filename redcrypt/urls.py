@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hunt.views import index, offline, play, check_ans
+from hunt.views import index, offline, play, check_ans, leaderboard
 from accounts import views as accounts_views
 
 
@@ -56,6 +56,8 @@ urlpatterns = [
         name='verification-sent'),
     path('play/', play, name='play'),
     path('play', play),
+    path('leaderboard/',leaderboard, name='leaderboard'),
+    path('leaderboard',leaderboard,),
     path('check/', check_ans, name='check_ans'),
     path('', include((
         'url_shortner.urls', 'url_shortner'),

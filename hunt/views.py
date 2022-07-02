@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from hunt.decorators import hunt_status
 from hunt.models import AdditionalHint, Question, LevelTracking, AnswerAttempt
 from accounts.models import Profile
 from hunt.utils import match_answer
@@ -16,6 +17,7 @@ def offline(request):
 
 
 @login_required
+@hunt_status
 def play(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -27,6 +29,7 @@ def play(request):
 
 
 @login_required
+@hunt_status
 def check_ans(request):
     if request.method == "POST":
         user = request.user
@@ -34,9 +37,12 @@ def check_ans(request):
         question = Question.objects.get(level=profile.current_level)
         answer = request.POST['answer']
         try:
-            AnswerAttempt.objects.create(user=request.user, level=profile.current_level, answer=answer)
+            AnswerAttempt.objects.create(
+                user=request.user,
+                level=profile.current_level,
+                answer=answer)
         except Exception as e:
-            print('check_answer(): Exception occurred while saving answer attempt', e)        
+            print('answer attempt error', e)
         if match_answer(question.answer, answer):
             profile.current_level += 1
             profile.score += question.points
@@ -50,3 +56,8 @@ def check_ans(request):
             return JsonResponse({'correct': True}, status=200)
         else:
             return JsonResponse({'correct': False}, status=400)
+
+
+def leaderboard(request):
+    profiles = Profile.objects.all().order_by('-score', 'last_completed_time')
+    return render(request, 'leaderboard.html', {'players': profiles})

@@ -16,7 +16,7 @@ class IPsAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'name', 'discord_id']
-    readonly_fields = ('user',)
+    readonly_fields = ('user', 'last_completed_time')
     list_display = [
         'user',
         'score',
@@ -36,6 +36,7 @@ class ProfileAdmin(admin.ModelAdmin):
         ('Hunt',
             {'fields': [
                 ('score', 'current_level'),
+                ('last_completed_time'),
                 ('banned_reason', 'is_banned')
                 ]}),
         ('IPs',
