@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from hunt.decorators import hunt_status, not_banned
 from hunt.models import AdditionalHint, Question, LevelTracking, AnswerAttempt
 from accounts.models import Profile
-from hunt.utils import match_answer
+from hunt.utils import match_answer, get_rank
 # Create your views here.
 
 
@@ -60,10 +60,12 @@ def check_ans(request):
 
 
 def leaderboard(request):
-    profiles = Profile.objects.all().order_by('-score', 'last_completed_time')
-    user_profile = Profile.objects.get(user=request.user)
-    above_players = Profile.objects.filter(score__gt=user_profile.score) | Profile.objects.filter(score=user_profile.score, last_completed_time__lt=user_profile.last_completed_time)
-    above = above_players.count()
+    staff = Profile.objects.filter(user__is_staff=True).order_by('-score', 'last_completed_time')
+    profiles = Profile.objects.all().exclude(is_banned=True).exclude(user__is_staff=True).order_by('-score', 'last_completed_time')
+    banned = Profile.objects.filter(is_banned=True).order_by('last_completed_time')
+    rank = get_rank(request.user)
     return render(request, 'leaderboard.html', {
+        'staff': staff,
         'players': profiles,
-        'rank': above+1})
+        'rank': rank,
+        'banned': banned})

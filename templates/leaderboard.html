@@ -34,7 +34,14 @@ td{
                 </tr>
             </thead>
             
-            <tbody>                
+            <tbody>
+                {% for user in staff %}
+                <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
+                    <td class="text-left text-xl leading-6 text-nblue">Staff</td>
+                    <td class="text-left text-xl leading-6 text-nblue underline"><a href="{% url 'public-profile' username=user%}">{{ user }}</a></td>
+                    <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
+                </tr>
+                {% endfor %}
                 {% for user in players %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
                     <td class="text-left text-xl leading-6 text-nblue">{{ forloop.counter }}</td>
@@ -42,6 +49,15 @@ td{
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
+                {% if banned %}
+                {% for user in banned %}
+                <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
+                    <td class="text-left text-xl leading-6 text-nblue">☠</td>
+                    <td class="text-left text-xl leading-6 text-nblue underline">{{ user }}</td>
+                    <td class="text-left text-xl leading-6 text-nblue">☠</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>

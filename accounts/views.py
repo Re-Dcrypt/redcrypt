@@ -7,15 +7,16 @@ from hunt.decorators import not_banned
 from django.urls import reverse
 from allauth.account.utils import send_email_confirmation
 from django.core.exceptions import ObjectDoesNotExist
+from hunt.utils import get_rank
 
 
+@not_banned
 @login_required
 def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     k = SocialAccount.objects.filter(user=request.user)
-    above_players = Profile.objects.filter(score__gt=profile.score) | Profile.objects.filter(score=profile.score, last_completed_time__lt=profile.last_completed_time)
-    above = above_players.count()
+    rank = get_rank(request.user)
     if len(k) > 0:
         connected = True
         username = f"{k[0].extra_data['username']}#{k[0].extra_data['discriminator']}"
@@ -35,10 +36,11 @@ def profile(request):
             'connected': connected,
             'discord': username,
             'toast': toast,
-            'rank': above+1,
+            'rank': rank,
         })
 
 
+@not_banned
 @login_required
 def edit_profile(request):
     user = request.user
@@ -83,12 +85,11 @@ def public_profile(request, username):
     try:
         usern = User.objects.get(username=username)
         profile = Profile.objects.get(user=usern)
-        above_players = Profile.objects.filter(score__gt=profile.score) | Profile.objects.filter(score=profile.score, last_completed_time__lt=profile.last_completed_time)
-        above = above_players.count()
+        rank = get_rank(usern)
         return render(
             request,
             'public_profile.html',
-            {'usern': usern, 'profile': profile, 'rank': above+1})
+            {'usern': usern, 'profile': profile, 'rank': rank})
     except ObjectDoesNotExist:
         return render(request, '404.html', status=404)
 
