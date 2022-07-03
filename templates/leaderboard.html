@@ -29,7 +29,7 @@ td{
             <thead class="border border-nblue" style="border-bottom: 1px solid #00d2d2;">
                 <tr class="p-3">
                     <th class="border border-nblue text-left text-xl font-bold leading-6 text-nblue">Rank</th>
-                    <th class="border border-nblue text-left text-xl font-bold leading-6 text-nblue">Username</th>
+                    <th class="border border-nblue text-left text-xl font-bold leading-6 text-nblue">User</th>
                     <th class="border border-nblue text-left text-xl font-bold leading-6 text-nblue">Score</th>
                 </tr>
             </thead>
@@ -38,14 +38,14 @@ td{
                 {% for user in staff %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
                     <td class="text-left text-xl leading-6 text-nblue">Staff</td>
-                    <td class="text-left text-xl leading-6 text-nblue underline"><a href="{% url 'public-profile' username=user%}">{{ user }}</a></td>
+                    <td class="text-left text-xl leading-6 text-nblue"><u><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></u></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
                 {% for user in players %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
                     <td class="text-left text-xl leading-6 text-nblue">{{ forloop.counter }}</td>
-                    <td class="text-left text-xl leading-6 text-nblue underline"><a href="{% url 'public-profile' username=user%}">{{ user }}</a></td>
+                    <td class="text-left text-xl leading-6 text-nblue"><u><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></u></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
@@ -53,7 +53,7 @@ td{
                 {% for user in banned %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
                     <td class="text-left text-xl leading-6 text-nblue">☠</td>
-                    <td class="text-left text-xl leading-6 text-nblue underline">{{ user }}</td>
+                    <td class="text-left text-xl leading-6 text-nblue"><u><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</u></td>
                     <td class="text-left text-xl leading-6 text-nblue">☠</td>
                 </tr>
                 {% endfor %}
