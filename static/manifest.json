@@ -1,0 +1,38 @@
+{
+    "name": "Re-Dcrypt",
+    "short_name": "Re-Dcrypt",
+    "description": "Re-Dcrypt Cryptic Hunt.",
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/",
+    "orientation": "any",
+    "background_color": "#002a2a",
+    "theme_color": "#00d2d2",
+    "shortcuts": [
+        {
+          "name": "Play Re-Dcrypt",
+          "short_name": "Play",
+          "description": "Play the cryptic hunt",
+          "url": "/play/",
+          "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+        },
+        {
+          "name": "Leaderboard",
+          "short_name": "Leaderboard",
+          "description": "View leaderboard",
+          "url": "/leaderboard/",
+          "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Profile",
+            "short_name": "Profile",
+            "description": "View your profile",
+            "url": "/profile/",
+            "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+          }
+      ],
+    "status_bar": "default",
+    "icons": [{"src": "/icons/maskable_icon_x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"}, {"src": "/icons/maskable_icon_x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"}, {"src": "/icons/maskable_icon_x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}],
+    "dir": "auto",
+    "lang": "en-US"
+  }
