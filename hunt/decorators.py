@@ -36,3 +36,21 @@ def hunt_status(function):
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap
+
+
+def not_banned(function):
+    def wrap(request, *args, **kwargs):
+        try:
+            if request.user.profile.is_banned:
+                return render(request, 'banned.html', {
+                    'reason': request.user.profile.banned_reason})
+            else:
+                return function(request, *args, **kwargs)
+
+        except Exception as e:
+            print('banned error', e)
+            return redirect('index')
+
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap

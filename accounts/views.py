@@ -3,9 +3,11 @@ from accounts.models import Profile
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from hunt.decorators import not_banned
 from django.urls import reverse
 from allauth.account.utils import send_email_confirmation
 from django.core.exceptions import ObjectDoesNotExist
+
 
 @login_required
 def profile(request):
@@ -50,6 +52,7 @@ def edit_profile(request):
         })
 
 
+@not_banned
 @login_required
 def save_profile(request):
     user = request.user
@@ -90,6 +93,7 @@ def public_profile(request, username):
         return render(request, '404.html', status=404)
 
 
+@not_banned
 @login_required
 def connect(request):
     profile = Profile.objects.get(user=request.user)
@@ -100,6 +104,7 @@ def connect(request):
     return redirect('profile')
 
 
+@not_banned
 @login_required
 def send_confirmation_email(request):
     send_email_confirmation(request, request.user)

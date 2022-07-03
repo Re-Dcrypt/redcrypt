@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from hunt.decorators import hunt_status
+from hunt.decorators import hunt_status, not_banned
 from hunt.models import AdditionalHint, Question, LevelTracking, AnswerAttempt
 from accounts.models import Profile
 from hunt.utils import match_answer
@@ -16,8 +16,9 @@ def offline(request):
     return render(request, 'offline.html')
 
 
-@login_required
 @hunt_status
+@not_banned
+@login_required
 def play(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -28,8 +29,8 @@ def play(request):
         'additionalhints': additionalhints})
 
 
-@login_required
 @hunt_status
+@login_required
 def check_ans(request):
     if request.method == "POST":
         user = request.user
