@@ -33,6 +33,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1']
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 # SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
@@ -61,6 +64,7 @@ INSTALLED_APPS = [
     'hcaptcha',
     'maintenance_mode',
     'pwa',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +77,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'redcrypt.middleware.CustomMiddleware',
-    'maintenance_mode.middleware.MaintenanceModeMiddleware'
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'redcrypt.urls'

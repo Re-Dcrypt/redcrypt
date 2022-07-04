@@ -62,4 +62,5 @@ urlpatterns = [
     path('', include((
         'url_shortner.urls', 'url_shortner'),
         namespace='url_shortner')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

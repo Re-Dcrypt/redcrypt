@@ -63,7 +63,10 @@ def leaderboard(request):
     staff = Profile.objects.filter(user__is_staff=True).order_by('-score', 'last_completed_time')
     profiles = Profile.objects.all().exclude(is_banned=True).exclude(user__is_staff=True).order_by('-score', 'last_completed_time')
     banned = Profile.objects.filter(is_banned=True).order_by('last_completed_time')
-    rank = get_rank(request.user)
+    if request.user.is_authenticated:
+        rank = get_rank(request.user)
+    else:
+        rank = 'unauthorised'
     return render(request, 'leaderboard.html', {
         'staff': staff,
         'players': profiles,
