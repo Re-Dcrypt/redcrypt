@@ -26,7 +26,8 @@ def play(request):
     additionalhints = AdditionalHint.objects.filter(question=question)
     return render(request, 'play.html', {
         'question': question,
-        'additionalhints': additionalhints})
+        'additionalhints': additionalhints,
+        'url_name': 'play'})
 
 
 @hunt_status
@@ -60,9 +61,18 @@ def check_ans(request):
 
 
 def leaderboard(request):
-    staff = Profile.objects.filter(user__is_staff=True).order_by('-score', 'last_completed_time')
-    profiles = Profile.objects.all().exclude(is_banned=True).exclude(user__is_staff=True).order_by('-score', 'last_completed_time')
-    banned = Profile.objects.filter(is_banned=True).order_by('last_completed_time')
+    staff = Profile.objects.filter(
+        user__is_staff=True).order_by(
+            '-score',
+            'last_completed_time')
+    profiles = Profile.objects.all().exclude(
+        is_banned=True).exclude(
+            user__is_staff=True).order_by(
+                '-score',
+                'last_completed_time')
+    banned = Profile.objects.filter(
+        is_banned=True).order_by(
+            'last_completed_time')
     if request.user.is_authenticated:
         rank = get_rank(request.user)
     else:
@@ -71,4 +81,5 @@ def leaderboard(request):
         'staff': staff,
         'players': profiles,
         'rank': rank,
-        'banned': banned})
+        'banned': banned,
+        'url_name': 'leaderboard'})

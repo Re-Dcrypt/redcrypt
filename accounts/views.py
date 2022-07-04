@@ -19,7 +19,8 @@ def profile(request):
     rank = get_rank(request.user)
     if len(k) > 0:
         connected = True
-        username = f"{k[0].extra_data['username']}#{k[0].extra_data['discriminator']}"
+        username = f"{k[0].extra_data['username']}",
+        f"#{k[0].extra_data['discriminator']}"
     else:
         connected = False
         username = None
