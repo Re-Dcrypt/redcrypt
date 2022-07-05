@@ -25,7 +25,7 @@
         
             <img src="{% avatar user %}" alt="dp" class="rounded-full border border-nblue border-3" style="width:80px;height:80px;margin-top:-80px;">
             <h1 class="text-nblue text-3xl font-bold mt-4 mb-6">Edit Profile</h1>
-            <form action="{% url 'save_profile' %}" method="post" class="justify-start">
+            <form id="answer_form" action="{% url 'save_profile' %}" method="post" class="justify-start">
                 {% csrf_token %}
             <!--<div class="relative flex justify-center items-center group p-2 ">-->
             <label for="username" class="text-nblue mr-6 justify-start">Username:</label>
@@ -63,5 +63,27 @@
         </center></form>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#answer_form').submit(function (e){
+            e.preventDefault();
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'save_profile' %}',
+                data: serializedData,
+                success: function(data){
+                        showToast("Profile Saved Successfully!",1500)
+                        setTimeout(function(){
+                            window.location.href = "{% url 'profile' %}";
+                        },1500);                        
+                    },
+                error : function(response){
+                    showToast("Error Saving Profile!",1500)
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}

@@ -1,13 +1,14 @@
 from django.shortcuts import redirect, render
+from django.http import JsonResponse
 from accounts.models import Profile
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from hunt.decorators import not_banned
-from django.urls import reverse
 from allauth.account.utils import send_email_confirmation
 from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank
+from sentry_sdk import capture_exception
 
 
 @not_banned
@@ -19,15 +20,10 @@ def profile(request):
     rank = get_rank(request.user)
     if len(k) > 0:
         connected = True
-        username = f"{k[0].extra_data['username']}",
-        f"#{k[0].extra_data['discriminator']}"
+        username = f"{k[0].extra_data['username']}#{k[0].extra_data['discriminator']}"
     else:
         connected = False
         username = None
-    if request.GET.get('profile_saved') == "True":
-        toast = True
-    else:
-        toast = False
     return render(
         request,
         'profile.html',
@@ -36,7 +32,6 @@ def profile(request):
             'profile': profile,
             'connected': connected,
             'discord': username,
-            'toast': toast,
             'rank': rank,
         })
 
@@ -58,28 +53,31 @@ def edit_profile(request):
 @not_banned
 @login_required
 def save_profile(request):
-    user = request.user
-    profile = Profile.objects.get(user=user)
-    profile.name = request.POST['name']
-    try:
-        if request.POST['is_name_public'] == "on":
-            profile.is_public_name = True
-        else:
-            profile.is_public_name = False
-    except KeyError:
-        profile.is_public_name = False
-    profile.organization = request.POST['organization']
-    try:
-        if request.POST['is_organization_public'] == "on":
-            profile.is_public_organization = True
-        else:
-            profile.is_public_organization = False
-    except KeyError:
-        profile.is_public_organization = False
-    profile.save()
-    base_url = reverse('profile')
-    url = '{}?profile_saved=True'.format(base_url)
-    return redirect(url)
+    if request.method == "POST":
+        try:
+            user = request.user
+            profile = Profile.objects.get(user=user)
+            profile.name = request.POST['name']
+            try:
+                if request.POST['is_name_public'] == "on":
+                    profile.is_public_name = True
+                else:
+                    profile.is_public_name = False
+            except KeyError:
+                profile.is_public_name = False
+            profile.organization = request.POST['organization']
+            try:
+                if request.POST['is_organization_public'] == "on":
+                    profile.is_public_organization = True
+                else:
+                    profile.is_public_organization = False
+            except KeyError:
+                profile.is_public_organization = False
+            profile.save()
+            return JsonResponse({'saved': True}, status=200)
+        except Exception as e:
+            capture_exception(e)
+            return JsonResponse({'saved': False}, status=400)
 
 
 def public_profile(request, username):

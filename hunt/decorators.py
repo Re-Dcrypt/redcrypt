@@ -41,7 +41,7 @@ def hunt_status(function):
 def not_banned(function):
     def wrap(request, *args, **kwargs):
         try:
-            if request.user.profile.is_banned:
+            if request.user.profile.is_banned and request.user.is_authenticated:
                 return render(request, 'banned.html', {
                     'reason': request.user.profile.banned_reason})
             else:

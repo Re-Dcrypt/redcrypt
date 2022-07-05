@@ -5,6 +5,7 @@ from hunt.decorators import hunt_status, not_banned
 from hunt.models import AdditionalHint, Question, LevelTracking, AnswerAttempt
 from accounts.models import Profile
 from hunt.utils import match_answer, get_rank
+from sentry_sdk import capture_exception
 # Create your views here.
 
 
@@ -22,12 +23,15 @@ def offline(request):
 def play(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    question = Question.objects.get(level=profile.current_level)
-    additionalhints = AdditionalHint.objects.filter(question=question)
-    return render(request, 'play.html', {
-        'question': question,
-        'additionalhints': additionalhints,
-        'url_name': 'play'})
+    if profile.current_level > 1:
+        return render(request, 'complete.html')
+    else:
+        question = Question.objects.get(level=profile.current_level)
+        additionalhints = AdditionalHint.objects.filter(question=question)
+        return render(request, 'play.html', {
+            'question': question,
+            'additionalhints': additionalhints,
+            'url_name': 'play'})
 
 
 @hunt_status
@@ -54,7 +58,7 @@ def check_ans(request):
                     user=request.user,
                     level=profile.current_level)
             except Exception as e:
-                print('Level completion tracking exception', e)
+                capture_exception(e)
             return JsonResponse({'correct': True}, status=200)
         else:
             return JsonResponse({'correct': False}, status=400)
@@ -83,3 +87,7 @@ def leaderboard(request):
         'rank': rank,
         'banned': banned,
         'url_name': 'leaderboard'})
+
+
+def faqs(request):
+    return render(request, 'faqs.html', {'url_name': 'faqs'})
