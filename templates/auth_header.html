@@ -1,3 +1,4 @@
+{% load static %}
 {% load profile_tags %}
 <header class="sticky top-0 text-gray-400 bg-nblue-800 body-font z-10">
   <div
@@ -10,9 +11,7 @@
       <a href="#" class="text-nblue hover:text-nblue-200">About</a>
     </nav>
     <a href="#" class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0">
-      <span class="ml-3 text-xl xl:block lg:hidden text-nblue hover:text-nblue-200">
-          Re-Dcrypt
-      </span>
+      <img src="{% static 'logo_banner.svg' %}" class="h-12 -m-2">
     </a>
     <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
       <div class="flex justify-center  content-center items-center">

@@ -18,8 +18,8 @@ def offline(request):
 
 
 @hunt_status
-@not_banned
 @login_required
+@not_banned
 def play(request):
     user = request.user
     profile = Profile.objects.get(user=user)
