@@ -4,6 +4,7 @@ import os
 from django.http import HttpResponse
 from accounts.models import Profile
 from django.core.exceptions import ObjectDoesNotExist
+from hunt.utils import get_rank
 # Create your views here.
 
 
@@ -13,8 +14,7 @@ def get_profile(request, discord_id):
         return HttpResponse(status=403)
     try:
         user = Profile.objects.get(discord_id=discord_id)
-        above_players = Profile.objects.filter(score__gt=user.score) | Profile.objects.filter(score=user.score, last_completed_time__lt=user.last_completed_time)
-        above = above_players.count()
+        rank = get_rank(user.user)
         data_dict = {}
         data_dict['username'] = user.user.username
         if user.is_banned:
@@ -28,7 +28,7 @@ def get_profile(request, discord_id):
             data_dict['name'] = user.name
         data_dict['score'] = user.score
         data_dict['current_level'] = user.current_level
-        data_dict['rank'] = above+1
+        data_dict['rank'] = rank
         if user.is_public_organization:
             data_dict['organization'] = user.organization
         return HttpResponse(json.dumps(data_dict))
