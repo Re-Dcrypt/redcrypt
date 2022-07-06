@@ -138,7 +138,15 @@ def submit_contact_form(request):
                 return JsonResponse({'saved': True}, status=200)
         except Exception as e:
             capture_exception(e)
-            return JsonResponse({'saved': False, 'message': str(e)}, status=400)
+            return JsonResponse(
+                {'saved': False, 'message': str(e)},
+                status=400)
 
     else:
-        return JsonResponse({'saved': False, 'message': "Some Error Occured"}, status=400)
+        return JsonResponse(
+            {'saved': False, 'message': "Some Error Occured"},
+            status=400)
+
+
+def e500(request):
+    return render(request, '500.html', status=500)

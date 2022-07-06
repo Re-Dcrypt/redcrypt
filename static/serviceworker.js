@@ -4,6 +4,8 @@ var filesToCache = [
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png',
     '/offline.svg',
+    '/logo_banner.svg',
+    '/bg.svg'
 ];
 
 // Cache on install

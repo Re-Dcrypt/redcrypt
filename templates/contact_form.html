@@ -44,11 +44,13 @@
         <span class="text-2xl">Contact Us</span>
     </div>
     <div class="rounded lg:w-1/2 md:w-1/2 w-[98%] p-5 mt-16 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i><p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
+        You can contact us by emailing us at <a href="mailto:admin@redcryp.ml" class="text-nblue hover:text-nblue-500">admin@redcrypt.ml</a> {% if user.is_authenticated %}or by filling out the form below if you are logged in.
+        <hr class="border border-nblue mt-5 mb-5">
         <form action="{% url 'contact_form_submit' %}" method="POST" id="contact">
             {{form}}
             {% csrf_token %} 
             <button type="submit" class="bg-nblue-500 hover:bg-nblue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="submit">Submit</button>
-        </form>
+        </form>{% endif %}
     </div>
 </div>
 {% endblock content %}
