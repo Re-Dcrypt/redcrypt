@@ -61,6 +61,12 @@ urlpatterns = [
     path('faqs/', faqs, name='faqs'),
     path('faqs', faqs,),
     path('check/', check_ans, name='check_ans'),
+    path('contact/', accounts_views.contact_form_view, name='contact'),
+    path('contact', accounts_views.contact_form_view),
+    path(
+        'contact_form_submit',
+        accounts_views.submit_contact_form,
+        name='contact_form_submit'),
     path('', include((
         'url_shortner.urls', 'url_shortner'),
         namespace='url_shortner')),

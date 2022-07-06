@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
-from accounts.models import Profile
+from accounts.models import Profile, contact_form
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -9,10 +9,11 @@ from allauth.account.utils import send_email_confirmation
 from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank
 from sentry_sdk import capture_exception
+from accounts.forms import ContactForm
 
 
-@not_banned
 @login_required
+@not_banned
 def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -36,8 +37,8 @@ def profile(request):
         })
 
 
-@not_banned
 @login_required
+@not_banned
 def edit_profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -50,8 +51,8 @@ def edit_profile(request):
         })
 
 
-@not_banned
 @login_required
+@not_banned
 def save_profile(request):
     if request.method == "POST":
         try:
@@ -93,8 +94,8 @@ def public_profile(request, username):
         return render(request, '404.html', status=404)
 
 
-@not_banned
 @login_required
+@not_banned
 def connect(request):
     profile = Profile.objects.get(user=request.user)
     sa = SocialAccount.objects.get(user=request.user)
@@ -104,8 +105,8 @@ def connect(request):
     return redirect('profile')
 
 
-@not_banned
 @login_required
+@not_banned
 def send_confirmation_email(request):
     send_email_confirmation(request, request.user)
     return redirect('verification-sent')
@@ -114,3 +115,30 @@ def send_confirmation_email(request):
 @login_required
 def verification_sent(request):
     return render(request, 'verification_sent.html')
+
+
+def contact_form_view(request):
+    return render(request, 'contact_form.html', {'form': ContactForm},  status=200)
+
+
+def submit_contact_form(request):
+    if request.method == "POST":
+        subject = request.POST['subject']
+        message = request.POST['body']
+        h_captcha_response = request.POST['h-captcha-response']
+        try:
+            if h_captcha_response == "":
+                return JsonResponse({'success': False, 'message': "Please verify that you are not a robot."}, status=400)
+            else:
+                form_model = contact_form.objects.create(
+                    user=request.user,
+                    subject=subject,
+                    body=message)
+                form_model.save()
+                return JsonResponse({'saved': True}, status=200)
+        except Exception as e:
+            capture_exception(e)
+            return JsonResponse({'saved': False, 'message': str(e)}, status=400)
+
+    else:
+        return JsonResponse({'saved': False, 'message': "Some Error Occured"}, status=400)

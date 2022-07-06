@@ -37,14 +37,14 @@ td{
             <tbody>
                 {% for user in staff %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
-                    <td class="text-left text-xl leading-6 text-nblue">Staff</td>
+                    <td class="text-left text-xl leading-6 text-nblue"><img src="{% static 'logo.svg' %}" class="inline w-9"></td>
                     <td class="text-left text-xl leading-6 text-nblue"><u><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></u></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
                 {% for user in players %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
-                    <td class="text-left text-xl leading-6 text-nblue">{{ forloop.counter }}</td>
+                    <td class="text-left text-xl leading-6 text-nblue">{% if forloop.counter == 1 %}🥇{% elif forloop.counter == 2 %}🥈{% elif forloop.counter == 3 %}🥉{% else %}{{ forloop.counter }}{% endif %}</td>
                     <td class="text-left text-xl leading-6 text-nblue"><u><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></u></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>

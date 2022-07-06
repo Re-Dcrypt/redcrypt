@@ -41,3 +41,14 @@ class MyCustomSignupForm(SignupForm):
 
 class CustomForgetPassword(ResetPasswordForm):
     hcaptcha = hCaptchaField(theme='dark')
+
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(
+        required=True,
+        max_length=150,
+        widget=forms.TextInput(attrs={'class': 'text-nblue p-2'}))
+    body = forms.CharField(
+        required=True,
+        widget=forms.Textarea(attrs={'class': 'text-nblue p-2'}))
+    hCaptcha = hCaptchaField(theme='dark')

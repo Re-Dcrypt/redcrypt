@@ -49,6 +49,12 @@ class IPs(models.Model):
         verbose_name_plural = "IP addresses"
 
 
+class contact_form(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=150)
+    body = models.TextField()
+
+
 @receiver(user_signed_up)
 def user_signed_up_(request, user, **kwargs):
     profile = Profile.objects.get(user=user)

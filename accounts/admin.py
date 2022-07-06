@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, IPs
+from accounts.models import Profile, IPs, contact_form
 
 
 class IPsAdmin(admin.ModelAdmin):
@@ -46,5 +46,19 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
 
+class contact_formAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'subject',
+        'body'
+    ]
+    fields = [
+        ('user'),
+        ('subject'),
+        ('body')
+    ]
+
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(IPs, IPsAdmin)
+admin.site.register(contact_form, contact_formAdmin)

@@ -14,21 +14,21 @@
           "short_name": "Play",
           "description": "Play the cryptic hunt",
           "url": "/play/",
-          "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+          "icons": [{ "src": "/icons/maskable_icon_x192.png", "sizes": "192x192" }]
         },
         {
           "name": "Leaderboard",
           "short_name": "Leaderboard",
           "description": "View leaderboard",
           "url": "/leaderboard/",
-          "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+          "icons": [{ "src": "/icons/maskable_icon_x192.png", "sizes": "192x192" }]
         },
         {
             "name": "Profile",
             "short_name": "Profile",
             "description": "View your profile",
             "url": "/profile/",
-            "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+            "icons": [{ "src": "/icons/maskable_icon_x192.png", "sizes": "192x192" }]
           }
       ],
     "status_bar": "default",
