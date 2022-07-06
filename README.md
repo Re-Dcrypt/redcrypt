@@ -1,8 +1,9 @@
 <p align="center">
 <img width="400" src="https://static.redcrypt.ml/logo_banner.svg"><br>
-Re-Dcrypt
-</p>
-Cryptic Hunt
+<h1 align="center"> Re-Dcrypt</h1></p>
+<p align="center">Cryptic Hunt</p>
+
+
 
 ## Run Locally
 
