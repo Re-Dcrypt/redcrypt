@@ -33,7 +33,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('profile/', accounts_views.profile, name='profile'),
-    path('profile', accounts_views.profile),
     path('profile/edit/', accounts_views.edit_profile, name='edit_profile'),
     path(
         'profile/edit/save_profile',
@@ -55,21 +54,16 @@ urlpatterns = [
         accounts_views.verification_sent,
         name='verification-sent'),
     path('play/', play, name='play'),
-    path('play', play),
     path(
         'play/sample_questions',
         sample_questions_play,
         name='sample_questions_play'),
     path('play/sample_check_ans', sample_checkans, name='sample_checkans'),
     path('leaderboard/', leaderboard, name='leaderboard'),
-    path('leaderboard', leaderboard,),
     path('faqs/', faqs, name='faqs'),
-    path('faqs', faqs,),
     path('check/', check_ans, name='check_ans'),
     path('contact/', accounts_views.contact_form_view, name='contact'),
-    path('contact', accounts_views.contact_form_view),
     path('500/', accounts_views.e500, name='500'),
-    path('500', accounts_views.e500),
     path(
         'contact_form_submit',
         accounts_views.submit_contact_form,

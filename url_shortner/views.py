@@ -17,4 +17,4 @@ def redirect_url(request, slug):
                 {'content': url_details.content,
                  'urlname': slug})
         return redirect(url_details.full_url)
-    return render(request, '404.html', status=404)
+    return redirect(f'{slug}/')
