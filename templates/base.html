@@ -99,26 +99,32 @@
   if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
     showToast('Please use a chromium based browser or Firefox. You may experience some issues while using safari.',5000)
    }
-
-   let deferredPrompt;
-   window.addEventListener('beforeinstallprompt', function(e) {
-       deferredPrompt = e;
-   });
   </script>
   {% if user.is_authenticated %}
   <script>
-   const installApp = document.getElementById('installapp');
+    let deferredPrompt;
+    const addBtn = document.getElementById('installapp');
+    addBtn.classList.add("hidden")
+    window.addEventListener('beforeinstallprompt', function(e) {
+        deferredPrompt = e;
+        addBtn.classList.remove("hidden")
+    });
 
-    installApp.addEventListener('click', async () => {
+    addBtn.addEventListener('click', async () => {
         console.log(deferredPrompt)
         if (deferredPrompt !== undefined) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === 'accepted') {
+                showToast('Installing Re-Dcrypt',2000)
+                deferredPrompt = undefined;
+            }
+            else {
+                showToast('Installation cancelled ',2000)
                 deferredPrompt = undefined;
             }
         } else {
-          showToast('Re-Dcrypt App is already installed.',2000)
+          showToast('Re-Dcrypt App may be already installed or could not be installed. Please try again later or contact the admin',2500)
         }
     });
 {% endif %}
