@@ -25,7 +25,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames
-                    .filter(cacheName => (cacheName.startsWith("django-pwa-")))
+                    .filter(cacheName => (cacheName.startsWith("redcrypt-pwa-")))
                     .filter(cacheName => (cacheName !== staticCacheName))
                     .map(cacheName => caches.delete(cacheName))
             );
@@ -45,3 +45,4 @@ self.addEventListener("fetch", event => {
             })
     )
 });
+importScripts('https://cdn.webpushr.com/sw-server.min.js');
