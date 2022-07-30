@@ -9,6 +9,7 @@ class UrlShortnerAdmin(admin.ModelAdmin):
         'full_url',
         'click_counts',
     ]
+    readonly_fields = ['visited_by']
 
     def reset_click_counts(self, request, queryset):
         queryset.update(click_counts=0)
