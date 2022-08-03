@@ -30,7 +30,7 @@ class MyCustomSignupForm(SignupForm):
             user=user,
             name=self.cleaned_data['name'],
             organization=self.cleaned_data['organization'],
-            avatar_url=f"https://source.boringavatars.com/beam/{user.username}?colors=00D2D2,006D6D,002A2A,055D5D,074848"
+            avatar_url=f"https://source.boringavatars.com/beam/{user.username}?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
             )
         profile.save()
 
