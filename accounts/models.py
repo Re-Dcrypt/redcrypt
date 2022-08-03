@@ -26,7 +26,7 @@ class Profile(models.Model):
     ip_address_count = models.IntegerField(default=0)
     avatar_url = models.CharField(
         max_length=150,
-        default="https://source.boringavatars.com/beam/redcrypt?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
+        default="https://source.boringavatars.com/beam/512/redcrypt?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
     )
 
     def __str__(self):
