@@ -94,6 +94,10 @@ def faqs(request):
     return render(request, 'faqs.html', {'url_name': 'faqs'})
 
 
+def rules(request):
+    return render(request, 'rules.html', {'url_name': 'rules'})
+
+
 def about(request):
     return render(request, 'about.html', {'url_name': 'about'})
 
