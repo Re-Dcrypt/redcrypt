@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from allauth.account.signals import user_signed_up
+from allauth.socialaccount.signals import social_account_added
+
 from django.dispatch import receiver
 import requests
 import os
@@ -28,6 +30,7 @@ class Profile(models.Model):
         max_length=150,
         default="https://source.boringavatars.com/beam/512/redcrypt?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
     )
+    stats = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -81,3 +84,10 @@ def user_signed_up_(request, user, **kwargs):
             }]}]}
     url = os.getenv("DISCORD_LOGGING_WEBHOOK")
     requests.post(url, json=json_data)
+
+
+@receiver(social_account_added)
+def social_account_added_(request, **kwargs):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    print(profile.user, profile.discord_id)

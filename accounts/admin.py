@@ -37,7 +37,8 @@ class ProfileAdmin(admin.ModelAdmin):
             {'fields': [
                 ('score', 'current_level'),
                 ('last_completed_time'),
-                ('banned_reason', 'is_banned')
+                ('banned_reason', 'is_banned'),
+                ('stats')
                 ]}),
         ('IPs',
             {'fields': [

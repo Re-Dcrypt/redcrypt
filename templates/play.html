@@ -86,24 +86,24 @@
             data:serializedData,
             success:function(response){
                 if (response.correct===true){
-                    showToast("Correct 🎉",1500)
+                    showToast("Correct 🎉",1000)
                     var ansinput = document.getElementById("answer");
                     ansinput.value = "";
                     setTimeout(function(){
                     button.disabled = false;
                     button.classList.remove("hover:bg-nblue-700");
                     button.innerHTML = "Check";
-                    location.reload();},1500)
+                    location.reload();},1000)
                 }
                 else if (response.correct===false){
                     var ansinput = document.getElementById("answer");
                     ansinput.value = "";
-                    showToast("Incorrect 😢",1500);
+                    showToast("Incorrect 😢",1000);
                     setTimeout(function(){
                         button.disabled = false;
                         button.classList.remove("hover:bg-nblue-700");
                         button.innerHTML = "Check";
-                    },1500);
+                    },1000);
                 }
             },
             error : function(response) {
