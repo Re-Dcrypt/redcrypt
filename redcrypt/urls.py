@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hunt.views import index, offline, play, check_ans, leaderboard, faqs, sample_questions_play, sample_checkans
+from hunt.views import index, offline, play, check_ans, leaderboard, faqs, sample_questions_play, sample_checkans, about
 from accounts import views as accounts_views
 
 
@@ -61,6 +61,7 @@ urlpatterns = [
     path('play/sample_check_ans', sample_checkans, name='sample_checkans'),
     path('leaderboard/', leaderboard, name='leaderboard'),
     path('faqs/', faqs, name='faqs'),
+    path('about/', about, name='about'),
     path('check/', check_ans, name='check_ans'),
     path('contact/', accounts_views.contact_form_view, name='contact'),
     path('500/', accounts_views.e500, name='500'),
