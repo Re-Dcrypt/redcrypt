@@ -1,5 +1,6 @@
 from extra_settings.models import Setting
 from django.shortcuts import redirect, render
+from sentry_sdk import capture_exception
 
 
 def hunt_status(function):
@@ -30,7 +31,7 @@ def hunt_status(function):
             elif status == 'ended':
                 return render(request, 'ended.html')
         except Exception as e:
-            print('hunt_status error', e)
+            capture_exception(e)
             return redirect('index')
 
     wrap.__doc__ = function.__doc__
@@ -48,7 +49,7 @@ def not_banned(function):
                 return function(request, *args, **kwargs)
 
         except Exception as e:
-            print('banned error', e)
+            capture_exception(e)
             return redirect('index')
 
     wrap.__doc__ = function.__doc__
