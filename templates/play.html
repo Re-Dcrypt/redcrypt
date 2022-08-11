@@ -82,21 +82,35 @@
         var serializedData = $(this).serialize();
         $.ajax({
             type:'POST',
-            url:'{% url "check_ans" %}',
+            url:"{% url 'check_ans' %}",
             data:serializedData,
-            success:function(json){
-                showToast("Correct 🎉",1500)
-                var ansinput = document.getElementById("answer");
-                ansinput.value = "";
-                button.disabled = false;
-                button.classList.remove("hover:bg-nblue-700");
-                button.innerHTML = "Check";
-                location.reload();
+            success:function(response){
+                if (response.correct===true){
+                    showToast("Correct 🎉",1500)
+                    var ansinput = document.getElementById("answer");
+                    ansinput.value = "";
+                    setTimeout(function(){
+                    button.disabled = false;
+                    button.classList.remove("hover:bg-nblue-700");
+                    button.innerHTML = "Check";
+                    location.reload();},1500)
+                }
+                else if (response.correct===false){
+                    var ansinput = document.getElementById("answer");
+                    ansinput.value = "";
+                    showToast("Incorrect 😢",1500);
+                    setTimeout(function(){
+                        button.disabled = false;
+                        button.classList.remove("hover:bg-nblue-700");
+                        button.innerHTML = "Check";
+                    },1500);                    
+                }
+                    
             },
             error : function(response) {
                 var ansinput = document.getElementById("answer");
                 ansinput.value = "";
-                showToast("Incorrect 😢",1500)
+                showToast("Some error occured, try again. If Problem persists, contact us.",1500)
                 setTimeout(function(){
                     button.disabled = false;
                     button.classList.remove("hover:bg-nblue-700");

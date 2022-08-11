@@ -62,7 +62,7 @@ def check_ans(request):
                 capture_exception(e)
             return JsonResponse({'correct': True}, status=200)
         else:
-            return JsonResponse({'correct': False}, status=400)
+            return JsonResponse({'correct': False}, status=200)
 
 
 def leaderboard(request):
@@ -92,6 +92,10 @@ def leaderboard(request):
 
 def faqs(request):
     return render(request, 'faqs.html', {'url_name': 'faqs'})
+
+
+def about(request):
+    return render(request, 'about.html', {'url_name': 'about'})
 
 
 @login_required
