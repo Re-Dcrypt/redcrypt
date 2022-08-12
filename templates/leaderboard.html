@@ -42,14 +42,14 @@ td{
                         Staff
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
-                    <td class="text-left text-xl leading-6 text-nblue"><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></td>
+                    <td class="text-left text-xl leading-6 text-nblue"><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user|truncatechars:15 }}</a></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
                 {% for user in players %}
                 <tr class="border-spacing-y-10 border-spacing-x-0 hover:scale-110 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-80 hover:bg-color-nblue-700" id="row">
                     <td class="text-left text-xl leading-6 text-nblue">{% if forloop.counter == 1 %}🥇{% elif forloop.counter == 2 %}🥈{% elif forloop.counter == 3 %}🥉{% else %}{{ forloop.counter }}{% endif %}</td>
-                    <td class="text-left text-xl leading-6 text-nblue"><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</a></td>
+                    <td class="text-left text-xl leading-6 text-nblue"><a href="{% url 'public-profile' username=user%}"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user|truncatechars:15 }}</a></td>
                     <td class="text-left text-xl leading-6 text-nblue">{{ user.score }}</td>
                 </tr>
                 {% endfor %}
@@ -61,7 +61,7 @@ td{
                         Disqualified
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
-                    <td class="text-left text-xl leading-6 text-nblue"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user }}</td>
+                    <td class="text-left text-xl leading-6 text-nblue"><img src="{{ user.avatar_url }}" class="inline w-9 rounded border border-nblue mr-5">{{ user|truncatechars:15 }}</td>
                     <td class="text-left text-xl leading-6 text-nblue">☠</td>
                 </tr>
                 {% endfor %}
