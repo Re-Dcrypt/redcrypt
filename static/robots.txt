@@ -1,0 +1,5 @@
+# I'm pretty sure you are not a robot. So go somewhere else
+
+User-agent: *
+Disallow: /play
+
