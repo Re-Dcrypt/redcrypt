@@ -1,10 +1,11 @@
 "All url views for Bot API"
 import json
 import os
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from accounts.models import Profile
 from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank
+from sentry_sdk import capture_exception
 # Create your views here.
 
 
@@ -34,3 +35,17 @@ def get_profile(request, discord_id):
         return HttpResponse(json.dumps(data_dict))
     except ObjectDoesNotExist:
         return HttpResponse(status=404)
+
+
+def verify_discord_id(request, discord_id):
+    "API for verifying discord id"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        user = Profile.objects.get(discord_id=discord_id)
+        return JsonResponse({'Username': user.user.username}, status=200)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)

@@ -137,3 +137,8 @@ staticfiles/
 *.pem
 *.crt
 *.key
+.stignore
+docker-compose.yml
+Dockerfile
+okteto.yml
+sync.ffs_db

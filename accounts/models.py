@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from allauth.account.signals import user_signed_up
 from allauth.socialaccount.signals import social_account_added
-
+import requests
 from django.dispatch import receiver
 import requests
 import os
@@ -90,4 +90,8 @@ def user_signed_up_(request, user, **kwargs):
 def social_account_added_(request, **kwargs):
     user = request.user
     profile = Profile.objects.get(user=user)
-    print(profile.user, profile.discord_id)
+    base_url = os.getenv("BOT_HOST")
+    url = f"{base_url}/connect/discord/{user.username}/{profile.discord_id}"
+    headers = {"Authorization": os.getenv("API_Authorization")}
+    requests.post(url, headers=headers)
+    #print(profile.user, profile.discord_id)
