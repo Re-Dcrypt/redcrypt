@@ -1,3 +1,4 @@
+from email import header
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,8 @@ from hunt.models import LevelTracking, AnswerAttempt, SampleQuestion
 from accounts.models import Profile
 from hunt.utils import match_answer, get_rank
 from sentry_sdk import capture_exception
+import os
+import requests
 # Create your views here.
 
 
@@ -66,6 +69,9 @@ def check_ans(request):
                     level=profile.current_level)
             except Exception as e:
                 capture_exception(e)
+            url = f"{os.getenv('BOT_HOST')}/level/complete/{profile.discord_id}/{int(profile.current_level)-1}"
+            headers = {"Authorization": os.getenv("API_Authorization")}
+            request = requests.post(url, headers=headers)
             return JsonResponse({'correct': True}, status=200)
         else:
             profile.save()
