@@ -134,6 +134,9 @@
 <script>
   const options = { color: 'rgb(0, 210, 210)',zIndex: '-1' };
   new Blobity(options);
+  {% if user.is_authenticated %}
+  webpushr('attributes',{"username" : user.username});
+  {% endif %}
 </script>
 </body>
 </html>
