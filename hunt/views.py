@@ -127,10 +127,8 @@ def sample_questions_play(request):
                 'content': "No sample questions available",
                 'urlname': "Sample"})
     for i in sample_questions:
-        print(i)
         if user in i.completed_by.all():
             pass
-            print("here")
         else:
             return render(
                 request,
