@@ -14,7 +14,7 @@ import requests
 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'homepage.html')
 
 
 def offline(request):

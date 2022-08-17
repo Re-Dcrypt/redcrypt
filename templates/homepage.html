@@ -1,0 +1,255 @@
+{% load static %}
+{% load pwa %}
+{% load profile_tags %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Re-Dcrypt</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Cryptic Hunt">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
+    {% progressive_web_app_meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'nblue': {  DEFAULT: '#00D2D2',  '50': '#8BFFFF',  '100': '#76FFFF',  '200': '#4DFFFF',  '300': '#25FFFF',  '400': '#00FBFB',  '500': '#00D2D2',  '600': '#009A9A',  '700': '#006262',  '800': '#002A2A',  '900': '#000000'},
+              },
+              fontFamily: {
+                Orbitron: ['Orbitron'],
+               },
+            }
+          }
+        }
+    </script>
+    <script src="https://cdn.blobity.dev/by.js?noAutoStart"></script>
+    <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+    <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('setup',{'key':'BMV7MjeKbxeGuAggNR84681uPcCkCWhHXgLYKMpgD3y9N8UJke40LjN86wvhW3MYf4DXrkZKkmyI3lwNJIXdF6o','sw':'none' });</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      header{
+          -webkit-box-shadow: 0px 20px 20px #00D2D2;
+          -moz-box-shadow:    0px 20px 20px #00D2D2;
+          box-shadow:         0px 20px 20px #00D2D2;}
+      body {
+          background-image: url('{% static 'bg.svg' %}');
+          /*background-color: #002A2A;*/
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          }
+      .install {
+        display: none;
+      }
+      @media all and (display-mode: standalone) {
+        .install{
+          display: none;
+        }
+      }
+      #custom_toast{
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s;
+        position: fixed;
+        bottom: -999px;
+        left: 25%;
+      }
+      #custom_toast.show{
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.5s;
+        bottom: 10px;
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+
+        @-webkit-keyframes animate-svg-stroke-1{0%{stroke-dashoffset:3668.13720703125px;stroke-dasharray:3668.13720703125px}100%{stroke-dashoffset:0;stroke-dasharray:3668.13720703125px}}@keyframes animate-svg-stroke-1{0%{stroke-dashoffset:3668.13720703125px;stroke-dasharray:3668.13720703125px}100%{stroke-dashoffset:0;stroke-dasharray:3668.13720703125px}}@-webkit-keyframes animate-svg-fill-1{0%{fill:transparent}100%{fill:rgb(0,0,0)}}@keyframes animate-svg-fill-1{0%{fill:transparent}100%{fill:rgb(0,0,0)}}.svg-elem-1{-webkit-animation:animate-svg-stroke-1 0.3s ease 0s both,animate-svg-fill-1 0.3s ease 0.7s both;animation:animate-svg-stroke-1 0.3s ease 0s both,animate-svg-fill-1 0.3s ease 0.7s both}@-webkit-keyframes animate-svg-stroke-2{0%{stroke-dashoffset:3565.2236328125px;stroke-dasharray:3565.2236328125px}100%{stroke-dashoffset:0;stroke-dasharray:3565.2236328125px}}@keyframes animate-svg-stroke-2{0%{stroke-dashoffset:3565.2236328125px;stroke-dasharray:3565.2236328125px}100%{stroke-dashoffset:0;stroke-dasharray:3565.2236328125px}}@-webkit-keyframes animate-svg-fill-2{0%{fill:transparent}100%{fill:rgb(0,0,0)}}@keyframes animate-svg-fill-2{0%{fill:transparent}100%{fill:rgb(0,0,0)}}.svg-elem-2{-webkit-animation:animate-svg-stroke-2 0.3s ease 0.12s both,animate-svg-fill-2 0.3s ease 0.7999999999999999s both;animation:animate-svg-stroke-2 0.3s ease 0.12s both,animate-svg-fill-2 0.3s ease 0.7999999999999999s both}@-webkit-keyframes animate-svg-stroke-3{0%{stroke-dashoffset:539.0068969726562px;stroke-dasharray:539.0068969726562px}100%{stroke-dashoffset:0;stroke-dasharray:539.0068969726562px}}@keyframes animate-svg-stroke-3{0%{stroke-dashoffset:539.0068969726562px;stroke-dasharray:539.0068969726562px}100%{stroke-dashoffset:0;stroke-dasharray:539.0068969726562px}}@-webkit-keyframes animate-svg-fill-3{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-3{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-3{-webkit-animation:animate-svg-stroke-3 0.3s ease 0.24s both,animate-svg-fill-3 0.3s ease 0.8999999999999999s both;animation:animate-svg-stroke-3 0.3s ease 0.24s both,animate-svg-fill-3 0.3s ease 0.8999999999999999s both}@-webkit-keyframes animate-svg-stroke-4{0%{stroke-dashoffset:567.200439453125px;stroke-dasharray:567.200439453125px}100%{stroke-dashoffset:0;stroke-dasharray:567.200439453125px}}@keyframes animate-svg-stroke-4{0%{stroke-dashoffset:567.200439453125px;stroke-dasharray:567.200439453125px}100%{stroke-dashoffset:0;stroke-dasharray:567.200439453125px}}@-webkit-keyframes animate-svg-fill-4{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-4{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-4{-webkit-animation:animate-svg-stroke-4 0.3s ease 0.36s both,animate-svg-fill-4 0.3s ease 1s both;animation:animate-svg-stroke-4 0.3s ease 0.36s both,animate-svg-fill-4 0.3s ease 1s both}@-webkit-keyframes animate-svg-stroke-5{0%{stroke-dashoffset:588.6129760742188px;stroke-dasharray:588.6129760742188px}100%{stroke-dashoffset:0;stroke-dasharray:588.6129760742188px}}@keyframes animate-svg-stroke-5{0%{stroke-dashoffset:588.6129760742188px;stroke-dasharray:588.6129760742188px}100%{stroke-dashoffset:0;stroke-dasharray:588.6129760742188px}}@-webkit-keyframes animate-svg-fill-5{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-5{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-5{-webkit-animation:animate-svg-stroke-5 0.3s ease 0.48s both,animate-svg-fill-5 0.3s ease 1.1s both;animation:animate-svg-stroke-5 0.3s ease 0.48s both,animate-svg-fill-5 0.3s ease 1.1s both}@-webkit-keyframes animate-svg-stroke-6{0%{stroke-dashoffset:603.1051025390625px;stroke-dasharray:603.1051025390625px}100%{stroke-dashoffset:0;stroke-dasharray:603.1051025390625px}}@keyframes animate-svg-stroke-6{0%{stroke-dashoffset:603.1051025390625px;stroke-dasharray:603.1051025390625px}100%{stroke-dashoffset:0;stroke-dasharray:603.1051025390625px}}@-webkit-keyframes animate-svg-fill-6{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-6{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-6{-webkit-animation:animate-svg-stroke-6 0.3s ease 0.6s both,animate-svg-fill-6 0.3s ease 1.2s both;animation:animate-svg-stroke-6 0.3s ease 0.6s both,animate-svg-fill-6 0.3s ease 1.2s both}@-webkit-keyframes animate-svg-stroke-7{0%{stroke-dashoffset:620.0493774414062px;stroke-dasharray:620.0493774414062px}100%{stroke-dashoffset:0;stroke-dasharray:620.0493774414062px}}@keyframes animate-svg-stroke-7{0%{stroke-dashoffset:620.0493774414062px;stroke-dasharray:620.0493774414062px}100%{stroke-dashoffset:0;stroke-dasharray:620.0493774414062px}}@-webkit-keyframes animate-svg-fill-7{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-7{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-7{-webkit-animation:animate-svg-stroke-7 0.3s ease 0.72s both,animate-svg-fill-7 0.3s ease 1.3s both;animation:animate-svg-stroke-7 0.3s ease 0.72s both,animate-svg-fill-7 0.3s ease 1.3s both}@-webkit-keyframes animate-svg-stroke-8{0%{stroke-dashoffset:639.1346435546875px;stroke-dasharray:639.1346435546875px}100%{stroke-dashoffset:0;stroke-dasharray:639.1346435546875px}}@keyframes animate-svg-stroke-8{0%{stroke-dashoffset:639.1346435546875px;stroke-dasharray:639.1346435546875px}100%{stroke-dashoffset:0;stroke-dasharray:639.1346435546875px}}@-webkit-keyframes animate-svg-fill-8{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-8{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-8{-webkit-animation:animate-svg-stroke-8 0.3s ease 0.84s both,animate-svg-fill-8 0.3s ease 1.4s both;animation:animate-svg-stroke-8 0.3s ease 0.84s both,animate-svg-fill-8 0.3s ease 1.4s both}@-webkit-keyframes animate-svg-stroke-9{0%{stroke-dashoffset:639.1345825195312px;stroke-dasharray:639.1345825195312px}100%{stroke-dashoffset:0;stroke-dasharray:639.1345825195312px}}@keyframes animate-svg-stroke-9{0%{stroke-dashoffset:639.1345825195312px;stroke-dasharray:639.1345825195312px}100%{stroke-dashoffset:0;stroke-dasharray:639.1345825195312px}}@-webkit-keyframes animate-svg-fill-9{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-9{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-9{-webkit-animation:animate-svg-stroke-9 0.3s ease 0.96s both,animate-svg-fill-9 0.3s ease 1.5s both;animation:animate-svg-stroke-9 0.3s ease 0.96s both,animate-svg-fill-9 0.3s ease 1.5s both}@-webkit-keyframes animate-svg-stroke-10{0%{stroke-dashoffset:620.0493774414062px;stroke-dasharray:620.0493774414062px}100%{stroke-dashoffset:0;stroke-dasharray:620.0493774414062px}}@keyframes animate-svg-stroke-10{0%{stroke-dashoffset:620.0493774414062px;stroke-dasharray:620.0493774414062px}100%{stroke-dashoffset:0;stroke-dasharray:620.0493774414062px}}@-webkit-keyframes animate-svg-fill-10{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-10{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-10{-webkit-animation:animate-svg-stroke-10 0.3s ease 1.08s both,animate-svg-fill-10 0.3s ease 1.6s both;animation:animate-svg-stroke-10 0.3s ease 1.08s both,animate-svg-fill-10 0.3s ease 1.6s both}@-webkit-keyframes animate-svg-stroke-11{0%{stroke-dashoffset:603.1051025390625px;stroke-dasharray:603.1051025390625px}100%{stroke-dashoffset:0;stroke-dasharray:603.1051025390625px}}@keyframes animate-svg-stroke-11{0%{stroke-dashoffset:603.1051025390625px;stroke-dasharray:603.1051025390625px}100%{stroke-dashoffset:0;stroke-dasharray:603.1051025390625px}}@-webkit-keyframes animate-svg-fill-11{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-11{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-11{-webkit-animation:animate-svg-stroke-11 0.3s ease 1.2s both,animate-svg-fill-11 0.3s ease 1.7s both;animation:animate-svg-stroke-11 0.3s ease 1.2s both,animate-svg-fill-11 0.3s ease 1.7s both}@-webkit-keyframes animate-svg-stroke-12{0%{stroke-dashoffset:588.6129150390625px;stroke-dasharray:588.6129150390625px}100%{stroke-dashoffset:0;stroke-dasharray:588.6129150390625px}}@keyframes animate-svg-stroke-12{0%{stroke-dashoffset:588.6129150390625px;stroke-dasharray:588.6129150390625px}100%{stroke-dashoffset:0;stroke-dasharray:588.6129150390625px}}@-webkit-keyframes animate-svg-fill-12{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-12{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-12{-webkit-animation:animate-svg-stroke-12 0.3s ease 1.3199999999999998s both,animate-svg-fill-12 0.3s ease 1.8s both;animation:animate-svg-stroke-12 0.3s ease 1.3199999999999998s both,animate-svg-fill-12 0.3s ease 1.8s both}@-webkit-keyframes animate-svg-stroke-13{0%{stroke-dashoffset:567.200439453125px;stroke-dasharray:567.200439453125px}100%{stroke-dashoffset:0;stroke-dasharray:567.200439453125px}}@keyframes animate-svg-stroke-13{0%{stroke-dashoffset:567.200439453125px;stroke-dasharray:567.200439453125px}100%{stroke-dashoffset:0;stroke-dasharray:567.200439453125px}}@-webkit-keyframes animate-svg-fill-13{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-13{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-13{-webkit-animation:animate-svg-stroke-13 0.3s ease 1.44s both,animate-svg-fill-13 0.3s ease 1.9000000000000001s both;animation:animate-svg-stroke-13 0.3s ease 1.44s both,animate-svg-fill-13 0.3s ease 1.9000000000000001s both}@-webkit-keyframes animate-svg-stroke-14{0%{stroke-dashoffset:216.68701171875px;stroke-dasharray:216.68701171875px}100%{stroke-dashoffset:0;stroke-dasharray:216.68701171875px}}@keyframes animate-svg-stroke-14{0%{stroke-dashoffset:216.68701171875px;stroke-dasharray:216.68701171875px}100%{stroke-dashoffset:0;stroke-dasharray:216.68701171875px}}@-webkit-keyframes animate-svg-fill-14{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-14{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-14{-webkit-animation:animate-svg-stroke-14 0.3s ease 1.56s both,animate-svg-fill-14 0.3s ease 2s both;animation:animate-svg-stroke-14 0.3s ease 1.56s both,animate-svg-fill-14 0.3s ease 2s both}@-webkit-keyframes animate-svg-stroke-15{0%{stroke-dashoffset:580.7634887695312px;stroke-dasharray:580.7634887695312px}100%{stroke-dashoffset:0;stroke-dasharray:580.7634887695312px}}@keyframes animate-svg-stroke-15{0%{stroke-dashoffset:580.7634887695312px;stroke-dasharray:580.7634887695312px}100%{stroke-dashoffset:0;stroke-dasharray:580.7634887695312px}}@-webkit-keyframes animate-svg-fill-15{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-15{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-15{-webkit-animation:animate-svg-stroke-15 0.3s ease 1.68s both,animate-svg-fill-15 0.3s ease 2.1s both;animation:animate-svg-stroke-15 0.3s ease 1.68s both,animate-svg-fill-15 0.3s ease 2.1s both}@-webkit-keyframes animate-svg-stroke-16{0%{stroke-dashoffset:2002.7060546875px;stroke-dasharray:2002.7060546875px}100%{stroke-dashoffset:0;stroke-dasharray:2002.7060546875px}}@keyframes animate-svg-stroke-16{0%{stroke-dashoffset:2002.7060546875px;stroke-dasharray:2002.7060546875px}100%{stroke-dashoffset:0;stroke-dasharray:2002.7060546875px}}@-webkit-keyframes animate-svg-fill-16{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-16{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-16{-webkit-animation:animate-svg-stroke-16 0.3s ease 1.7999999999999998s both,animate-svg-fill-16 0.3s ease 2.2s both;animation:animate-svg-stroke-16 0.3s ease 1.7999999999999998s both,animate-svg-fill-16 0.3s ease 2.2s both}@-webkit-keyframes animate-svg-stroke-17{0%{stroke-dashoffset:482px;stroke-dasharray:482px}100%{stroke-dashoffset:0;stroke-dasharray:482px}}@keyframes animate-svg-stroke-17{0%{stroke-dashoffset:482px;stroke-dasharray:482px}100%{stroke-dashoffset:0;stroke-dasharray:482px}}@-webkit-keyframes animate-svg-fill-17{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-17{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-17{-webkit-animation:animate-svg-stroke-17 0.3s ease 1.92s both,animate-svg-fill-17 0.3s ease 2.3s both;animation:animate-svg-stroke-17 0.3s ease 1.92s both,animate-svg-fill-17 0.3s ease 2.3s both}@-webkit-keyframes animate-svg-stroke-18{0%{stroke-dashoffset:2297.06201171875px;stroke-dasharray:2297.06201171875px}100%{stroke-dashoffset:0;stroke-dasharray:2297.06201171875px}}@keyframes animate-svg-stroke-18{0%{stroke-dashoffset:2297.06201171875px;stroke-dasharray:2297.06201171875px}100%{stroke-dashoffset:0;stroke-dasharray:2297.06201171875px}}@-webkit-keyframes animate-svg-fill-18{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-18{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-18{-webkit-animation:animate-svg-stroke-18 0.3s ease 2.04s both,animate-svg-fill-18 0.3s ease 2.4000000000000004s both;animation:animate-svg-stroke-18 0.3s ease 2.04s both,animate-svg-fill-18 0.3s ease 2.4000000000000004s both}@-webkit-keyframes animate-svg-stroke-19{0%{stroke-dashoffset:1527.3289794921875px;stroke-dasharray:1527.3289794921875px}100%{stroke-dashoffset:0;stroke-dasharray:1527.3289794921875px}}@keyframes animate-svg-stroke-19{0%{stroke-dashoffset:1527.3289794921875px;stroke-dasharray:1527.3289794921875px}100%{stroke-dashoffset:0;stroke-dasharray:1527.3289794921875px}}@-webkit-keyframes animate-svg-fill-19{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-19{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-19{-webkit-animation:animate-svg-stroke-19 0.3s ease 2.16s both,animate-svg-fill-19 0.3s ease 2.5s both;animation:animate-svg-stroke-19 0.3s ease 2.16s both,animate-svg-fill-19 0.3s ease 2.5s both}@-webkit-keyframes animate-svg-stroke-20{0%{stroke-dashoffset:960.3469848632812px;stroke-dasharray:960.3469848632812px}100%{stroke-dashoffset:0;stroke-dasharray:960.3469848632812px}}@keyframes animate-svg-stroke-20{0%{stroke-dashoffset:960.3469848632812px;stroke-dasharray:960.3469848632812px}100%{stroke-dashoffset:0;stroke-dasharray:960.3469848632812px}}@-webkit-keyframes animate-svg-fill-20{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-20{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-20{-webkit-animation:animate-svg-stroke-20 0.3s ease 2.28s both,animate-svg-fill-20 0.3s ease 2.6s both;animation:animate-svg-stroke-20 0.3s ease 2.28s both,animate-svg-fill-20 0.3s ease 2.6s both}@-webkit-keyframes animate-svg-stroke-21{0%{stroke-dashoffset:2094.233154296875px;stroke-dasharray:2094.233154296875px}100%{stroke-dashoffset:0;stroke-dasharray:2094.233154296875px}}@keyframes animate-svg-stroke-21{0%{stroke-dashoffset:2094.233154296875px;stroke-dasharray:2094.233154296875px}100%{stroke-dashoffset:0;stroke-dasharray:2094.233154296875px}}@-webkit-keyframes animate-svg-fill-21{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-21{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-21{-webkit-animation:animate-svg-stroke-21 0.3s ease 2.4s both,animate-svg-fill-21 0.3s ease 2.7s both;animation:animate-svg-stroke-21 0.3s ease 2.4s both,animate-svg-fill-21 0.3s ease 2.7s both}@-webkit-keyframes animate-svg-stroke-22{0%{stroke-dashoffset:2000.40185546875px;stroke-dasharray:2000.40185546875px}100%{stroke-dashoffset:0;stroke-dasharray:2000.40185546875px}}@keyframes animate-svg-stroke-22{0%{stroke-dashoffset:2000.40185546875px;stroke-dasharray:2000.40185546875px}100%{stroke-dashoffset:0;stroke-dasharray:2000.40185546875px}}@-webkit-keyframes animate-svg-fill-22{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-22{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-22{-webkit-animation:animate-svg-stroke-22 0.3s ease 2.52s both,animate-svg-fill-22 0.3s ease 2.8s both;animation:animate-svg-stroke-22 0.3s ease 2.52s both,animate-svg-fill-22 0.3s ease 2.8s both}@-webkit-keyframes animate-svg-stroke-23{0%{stroke-dashoffset:1265.144287109375px;stroke-dasharray:1265.144287109375px}100%{stroke-dashoffset:0;stroke-dasharray:1265.144287109375px}}@keyframes animate-svg-stroke-23{0%{stroke-dashoffset:1265.144287109375px;stroke-dasharray:1265.144287109375px}100%{stroke-dashoffset:0;stroke-dasharray:1265.144287109375px}}@-webkit-keyframes animate-svg-fill-23{0%{fill:transparent}100%{fill:rgb(0,210,210)}}@keyframes animate-svg-fill-23{0%{fill:transparent}100%{fill:rgb(0,210,210)}}.svg-elem-23{-webkit-animation:animate-svg-stroke-23 0.3s ease 2.6399999999999997s both,animate-svg-fill-23 0.3s ease 2.9000000000000004s both;animation:animate-svg-stroke-23 0.3s ease 2.6399999999999997s both,animate-svg-fill-23 0.3s ease 2.9000000000000004s both}
+    </style>
+    <link rel="stylesheet" href="https://static.redcrypt.ml/scrollbar.css">
+    {% block head %}{% endblock head %}
+</head>
+<body class="font-Orbitron">
+    {% if user.is_authenticated %}    
+        <header class="sticky top-0 text-gray-400 bg-nblue-800 body-font z-10">
+        <div
+            class="container mx-auto flex flex-wrap p-5 mt-0 mb-0 flex-col md:flex-row items-center"
+        >
+            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+            <a href="{% url 'play' %}" class="mr-5 {% if url_name == 'play' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">Play</a>
+            <a href="{% url 'leaderboard' %}" class="mr-5  {% if url_name == 'leaderboard' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">Leaderboard</a>
+            <a href="{% url 'rules' %}" class="mr-5 {% if url_name == 'rules' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">Rules</a>
+            <a href="{% url 'about' %}" class="{% if url_name == 'about' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">About</a>
+            </nav>
+            <a href="#" class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0">
+                <img src="{% static 'logo_banner.svg' %}" class="h-1" style="opacity: 0;">
+            </a>
+            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+            <div class="flex justify-center  content-center items-center">
+                    <div class="flex group relative z-1  content-center items-center">
+                    <span class="text-nblue mr-3  content-center items-center">{{user.username}}</span>
+                        <button class="text-nblue"> <img src="{% avatar user %}" alt="avatar" class="w-11 h-11 rounded-full mr-3 border border-2 border-nblue-500 lg:-mt-5 lg:-mb-5"></button>
+                        
+                        <nav tabindex="0" class="border border-2 bg-nblue-800 invisible border-nblue-400 rounded w-60 absolute right-0 top-full transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-1" style="z-index: 5" id="drop">
+                            <ul class="py-1">
+                            {% if user.is_staff %}
+                            <li>
+                                <a href="/honeypot/" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">
+                                    <center>Admin Panel</center>
+                                </a>
+                            </li>
+                            {% endif %}
+                                <li>
+                                    <a href="{% url 'profile' %}" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black">
+                                        <center>Profile</center>
+                                    </a>
+                                </li>
+                                <li>
+                                    <form action="{% url 'account_logout' %}" method="POST">
+                                        {% csrf_token %}
+                                    <button type="submit" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black w-full ">Sign Out</button>
+                                    </form>
+                                </li>
+                                <li>
+                                <div id='install'>
+                                    <button type="submit" id="installapp" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black w-full ">Install App</button>
+        
+                                </div>
+                            </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </header>    
+    {% else %}
+        <header class="sticky top-0 z-50 text-gray-400 bg-nblue-800 body-font">
+            <div
+            class="container mx-auto flex flex-wrap p-5 mt-0 mb-0 flex-col md:flex-row items-center"
+            >
+            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+                <a href="{% url 'leaderboard' %}" class="mr-5 {% if url_name == 'leaderboard' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">Leaderboard</a>
+                <a href="{% url 'rules' %}" class="mr-5 {% if url_name == 'rules' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">Rules</a>
+                <a href="{% url 'about' %}" class="{% if url_name == 'about' %}text-nblue-100{% else %}text-nblue{% endif %} hover:text-nblue-200">About</a>
+            </nav>
+            <a href="#" class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0">
+                <img src="{% static 'logo_banner.svg' %}" class="h-1" style="opacity: 0;">
+            </a>
+            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+                <div class="flex justify-center">
+                <a href="{% url 'account_login' %}">
+                    <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-nblue-200 to-nblue-600 group-hover:from-nblue-200 group-hover:to-nblue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-nblue-800 text-white rounded-md group-hover:bg-opacity-0">
+                            Login
+                        </span>
+                    </button>
+                    </a>
+                    <a href="{% url 'account_signup' %}">
+                    <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-nblue-200 to-nblue-600 group-hover:from-nblue-200 group-hover:to-nblue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-nblue-800 text-white rounded-md group-hover:bg-opacity-0">
+                            Signup
+                        </span>
+                    </button>
+                    </a>  
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </header>
+    {% endif %}
+    <center>
+    <div class="rounded lg:w-3/4 md:w-3/4 w-[98%] p-5 mt-16 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i><p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
+
+
+        <svg width="100%" height="100%" viewBox="0 0 3000 1080" version="1.1" id="svg5" xml:space="preserve" inkscape:version="1.2 (dc2aeda, 2022-05-15)" sodipodi:docname="logo_banner.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="px" showgrid="false" inkscape:zoom="0.29212963" inkscape:cx="1367.5436" inkscape:cy="833.53407" inkscape:window-width="1600" inkscape:window-height="816" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="layer2"></sodipodi:namedview><defs id="defs2"><rect x="568.63818" y="550.29846" width="1329.5248" height="503.54382" id="rect7263" class="svg-elem-1"></rect><rect x="534.57062" y="589.33051" width="1330.8701" height="450.74164" id="rect7203" class="svg-elem-2"></rect></defs><g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1"><g inkscape:label="Layer 1" id="layer1-5" transform="matrix(2,0,0,2,-155.77465,29.643587)" style="display:inline"><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 1.10468; stroke-opacity: 1;" d="m 106.71241,253.52098 0.5302,246.37474 c 0,0 7.79216,12.56108 18.55165,-0.51608 0.58031,-0.7053 -0.15471,-245.97543 -0.15471,-245.97543 0,0 -8.05401,-11.24367 -18.92714,0.11677 z" id="path378" sodipodi:nodetypes="ccscc" class="svg-elem-3"></path><g id="g4859" transform="matrix(1.1046774,0,0,1.1046774,-14.57693,-30.83103)"><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.923627; stroke-opacity: 1;" d="m 108.10713,240.25141 267.86536,-0.1 c 0,0 9.10959,-5.38603 -0.53041,-11.92885 -0.70418,-0.47794 -267.43063,-0.14106 -267.43063,-0.14106 0,0 -8.293452,5.98153 0.0958,12.16989 z" id="path378-3" sodipodi:nodetypes="ccsccc" class="svg-elem-4"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.940947; stroke-opacity: 1;" d="m 107.35233,217.88532 278.39703,-0.0999 c 0,0 9.46775,-5.37845 -0.55127,-11.91207 -0.73186,-0.47727 -277.9452,-0.14086 -277.9452,-0.14086 0,0 -8.619533,5.97311 0.0996,12.15277 z" id="path4748" sodipodi:nodetypes="ccsccc" class="svg-elem-5"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.952466; stroke-opacity: 1;" d="m 108.08351,197.67645 285.52253,-0.0998 c 0,0 9.71008,-5.37341 -0.56537,-11.90092 -0.7506,-0.47682 -285.05914,-0.14072 -285.05914,-0.14072 0,0 -8.84015,5.96751 0.10215,12.14139 z" id="path4750" sodipodi:nodetypes="ccsccc" class="svg-elem-6"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.965736; stroke-opacity: 1;" d="m 108.48742,176.93654 293.85123,-0.0997 c 0,0 9.99332,-5.36761 -0.58186,-11.88807 -0.7725,-0.47631 -293.37432,-0.14057 -293.37432,-0.14057 0,0 -9.098016,5.96107 0.10513,12.12829 z" id="path4752" sodipodi:nodetypes="ccsccc" class="svg-elem-7"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.980438; stroke-opacity: 1;" d="m 108.38384,155.26482 303.22924,-0.0996 c 0,0 10.31225,-5.36118 -0.60043,-11.87384 -0.79716,-0.47574 -302.7371,-0.1404 -302.7371,-0.1404 0,0 -9.388373,5.95393 0.10848,12.11378 z" id="path4754" sodipodi:nodetypes="ccsccc" class="svg-elem-8"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.980438; stroke-opacity: 1;" d="m 107.35013,134.06942 303.22924,-0.0996 c 0,0 10.31225,-5.36118 -0.60043,-11.87384 -0.79716,-0.47574 -302.7371,-0.1404 -302.7371,-0.1404 0,0 -9.388374,5.95393 0.10848,12.11378 z" id="path4756" sodipodi:nodetypes="ccsccc" class="svg-elem-9"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.965736; stroke-opacity: 1;" d="m 108.03851,112.87924 293.85123,-0.0997 c 0,0 9.99332,-5.36761 -0.58186,-11.88807 -0.7725,-0.47631 -293.37432,-0.14057 -293.37432,-0.14057 0,0 -9.098016,5.96107 0.10513,12.12829 z" id="path4758" sodipodi:nodetypes="ccsccc" class="svg-elem-10"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.952466; stroke-opacity: 1;" d="m 107.77388,90.80519 285.52253,-0.0998 c 0,0 9.71008,-5.37341 -0.56537,-11.90092 -0.7506,-0.47682 -285.05914,-0.14072 -285.05914,-0.14072 0,0 -8.840155,5.96751 0.10215,12.14139 z" id="path4760" sodipodi:nodetypes="ccsccc" class="svg-elem-11"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.940947; stroke-opacity: 1;" d="m 107.64801,68.535776 278.39703,-0.0999 c 0,0 9.46775,-5.37845 -0.55127,-11.91207 -0.73186,-0.47727 -277.9452,-0.14086 -277.9452,-0.14086 0,0 -8.619529,5.97311 0.0996,12.15277 z" id="path4762" sodipodi:nodetypes="ccsccc" class="svg-elem-12"></path><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 0.923627; stroke-opacity: 1;" d="m 107.38392,47.80509 267.86536,-0.1 c 0,0 9.10959,-5.38603 -0.53041,-11.92885 -0.70418,-0.47794 -267.43063,-0.14106 -267.43063,-0.14106 0,0 -8.293449,5.98153 0.0958,12.16989 z" id="path4764" sodipodi:nodetypes="ccsccc" class="svg-elem-13"></path></g><g id="g4847" transform="matrix(0.72540574,0.83312585,-0.83312585,0.72540574,286.22968,-75.688219)"><path style="fill: rgb(0, 210, 210); fill-opacity: 1; stroke: rgb(0, 210, 210); stroke-width: 1.22475; stroke-opacity: 1;" d="m 187.64254,251.7535 2.06452,79.86615 -55.28475,-38.09316 z" id="path4822" sodipodi:nodetypes="cccc" class="svg-elem-14"></path></g><path style="fill: rgb(0, 210, 210); stroke: rgb(0, 210, 210);" d="m 170.09801,302.12899 19.03367,-18.36262 164.03679,207.68829 c -1.07876,13.8401 -3.91628,12.38522 -15.64767,13.54377 z" id="path8717" sodipodi:nodetypes="ccccc" class="svg-elem-15"></path></g></g><g inkscape:groupmode="layer" id="layer2" inkscape:label="Layer 2"><g aria-label="e-Dcrypt" id="text7269" style="font-size:480px;font-family:Orbitron;-inkscape-font-specification:'Orbitron, @wght=479';font-variation-settings:'wght' 479;fill:#00d2d2;stroke:#00d2d2"><path d="m 640.69362,949.41339 q -16.8,0 -30.72,-8.16 -13.92,-8.64 -22.56,-22.56 -8.16,-13.92 -8.16,-30.72 v -155.52 q 0,-16.8 8.16,-30.72 8.64,-13.92 22.56,-22.08 13.92,-8.64 30.72,-8.64 h 160.32 q 16.8,0 30.72,8.64 13.92,8.16 22.08,22.08 8.64,13.92 8.64,30.72 v 102.24 h -234.24 v 52.32 q 0,5.28 3.84,9.6 4.32,3.84 9.6,3.84 h 220.8 v 48.96 h -221.76 z m -12.48,-161.28 h 184.8 v -54.72 q 0,-5.28 -3.84,-9.12 -3.84,-4.32 -9.6,-4.32 h -157.92 q -5.28,0 -9.6,4.32 -3.84,3.84 -3.84,9.12 z" id="path254" class="svg-elem-16"></path><path d="m 915.25335,831.81339 v 0 -48.96 h 191.03995 v 48.96 z" id="path256" class="svg-elem-17"></path><path d="m 1162.9325,949.41339 v -345.6 h 284.16 q 16.8,0 30.72,8.16 13.92,8.16 22.08,22.56 8.64,13.92 8.64,30.72 v 222.72 q 0,16.8 -8.64,31.2 -8.16,13.92 -22.08,22.08 -13.92,8.16 -30.72,8.16 z m 62.4,-49.44 h 220.32 q 5.76,0 9.6,-3.84 3.84,-3.84 3.84,-9.12 v -220.8 q 0,-5.28 -3.84,-9.12 -3.84,-3.84 -9.6,-3.84 h -220.32 q -5.76,0 -9.6,3.84 -3.84,3.84 -3.84,9.12 v 220.8 q 0,5.28 3.84,9.12 3.84,3.84 9.6,3.84 z" id="path258" class="svg-elem-18"></path><path d="m 1621.3324,949.41339 q -16.8,0 -30.72,-8.16 -13.92,-8.64 -22.56,-22.56 -8.16,-13.92 -8.16,-30.72 v -155.52 q 0,-16.8 8.16,-30.72 8.64,-13.92 22.56,-22.08 13.92,-8.64 30.72,-8.64 h 220.8 v 48.96 h -219.84 q -5.28,0 -9.6,4.32 -3.84,3.84 -3.84,9.12 v 153.6 q 0,5.28 3.84,9.6 4.32,3.84 9.6,3.84 h 220.8 v 48.96 h -221.76 z" id="path260" class="svg-elem-19"></path><path d="m 1892.5888,949.41339 v 0 -216.96 q 0,-16.8 8.16,-30.72 8.64,-13.92 22.56,-22.08 13.92,-8.64 30.72,-8.64 h 155.52 v 48.96 h -154.56 q -5.28,0 -9.6,4.32 -3.84,3.84 -3.84,9.12 v 216 z" id="path262" class="svg-elem-20"></path><path d="m 2184.9083,1056.9334 v 0 -49.92 h 170.88 q 5.76,0 9.6,-3.84 3.84,-3.84001 3.84,-9.60001 v -44.16 h -172.32 q -16.8,0 -30.72,-8.16 -13.92,-8.64 -22.56,-22.56 -8.16,-13.92 -8.16,-30.72 v -216 h 48.96 v 215.04 q 0,5.28 3.84,9.6 4.32,3.84 9.6,3.84 h 157.92 q 5.76,0 9.6,-3.84 3.84,-4.32 3.84,-9.6 v -215.04 h 49.44 v 323.04 q 0,17.28001 -8.16,31.20001 -8.16,13.92 -22.08,22.08 -13.92,8.64 -31.2,8.64 z" id="path264" class="svg-elem-21"></path><path d="m 2468.6447,1059.8134 v 0 -388.80001 h 221.76 q 16.8,0 30.72,8.64 13.92,8.16 22.08,22.08 8.64,13.92 8.64,30.72 v 155.52 q 0,16.8 -8.64,30.72 -8.16,13.92 -22.08,22.56 -13.92,8.16 -30.72,8.16 h -172.8 v 110.40001 z m 62.88,-159.36001 h 157.92 q 5.28,0 9.12,-3.84 4.32,-4.32 4.32,-9.6 v -153.6 q 0,-5.28 -4.32,-9.12 -3.84,-4.32 -9.12,-4.32 h -157.92 q -5.28,0 -9.6,4.32 -4.32,3.84 -4.32,9.12 v 153.6 q 0,5.28 4.32,9.6 4.32,3.84 9.6,3.84 z" id="path266" class="svg-elem-22"></path><path d="m 2848.3245,949.41339 q -17.28,0 -31.2,-8.16 -13.92,-8.64 -22.08,-22.56 -8.16,-13.92 -8.16,-30.72 v -305.76 h 48.96 v 88.8 h 115.68 v 48.96 h -115.68 v 167.04 q 0,5.28 3.84,9.6 4.32,3.84 9.6,3.84 h 102.24 v 48.96 h -103.2 z" id="path268" class="svg-elem-23"></path></g></g></svg>
+        
+    </div>
+    <div data-aos="zoom-in-up" class="rounded lg:w-3/4 md:w-3/4 w-[98%] p-5 mt-16 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i><p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
+    Re-Dcrypt is a cryptic hunt. <br>Are you one who can solve the cryptic clues?
+    <br>
+    <button class="mt-5 bg-nblue-800 hover:bg-nblue-500 hover:text-black border border-nblue hover:border-black text-nblue font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href={% url 'rules' %}">
+        Rules
+      </button>
+      <button class="mt-5 bg-nblue-800 hover:bg-nblue-500 hover:text-black border border-nblue hover:border-black text-nblue font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href={% url 'faqs' %}">
+        FAQs
+      </button>
+      <button class="mt-5 bg-nblue-800 hover:bg-nblue-500 hover:text-black border border-nblue hover:border-black text-nblue font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href={% url 'about' %}">
+        About
+      </button>
+    </div>
+
+  <div id="custom_toast" class="fixed bottom-0 left-1/4 p-4 mb-4 text-sm rounded-lg bg-nblue-800 text-nblue border border-nblue  w-1/2">
+  </div>
+  
+  </center>
+<script>
+  function showToast(message,time) {
+    let toast = document.getElementById('custom_toast');
+    toast.innerHTML = message;
+    toast.classList.add('show');
+    
+    setTimeout(function () {
+        toast.classList.remove('show');
+    }, time);
+}
+
+  let userAgent = navigator.userAgent;
+  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
+    showToast('Please use a chromium based browser or Firefox. You may experience some issues while using safari.',5000)
+   }
+  </script>
+  {% if user.is_authenticated %}
+  <script>
+    let deferredPrompt;
+    const addBtn = document.getElementById('installapp');
+    addBtn.classList.add("hidden")
+    window.addEventListener('beforeinstallprompt', function(e) {
+        deferredPrompt = e;
+        addBtn.classList.remove("hidden")
+    });
+
+    addBtn.addEventListener('click', async () => {
+        console.log(deferredPrompt)
+        if (deferredPrompt !== undefined) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                showToast('Installing Re-Dcrypt',2000)
+                deferredPrompt = undefined;
+            }
+            else {
+                showToast('Installation cancelled ',2000)
+                deferredPrompt = undefined;
+            }
+        } else {
+          showToast('Re-Dcrypt App may be already installed or could not be installed. Please try again later or contact the admin',2500)
+        }
+    });
+{% endif %}
+
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+  const options = { color: 'rgb(0, 210, 210)',zIndex: '-1' };
+  new Blobity(options);
+  {% if user.is_authenticated %}
+  webpushr('attributes',{"username" : user.username});
+  {% endif %}
+</script>
+</body>
+</html>
