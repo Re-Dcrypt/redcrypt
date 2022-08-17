@@ -6,6 +6,8 @@ from accounts.models import Profile
 from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank
 from sentry_sdk import capture_exception
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 
@@ -30,6 +32,7 @@ def get_profile(request, discord_id):
         data_dict['score'] = user.score
         data_dict['current_level'] = user.current_level
         data_dict['rank'] = rank
+        data_dict['avatar_url'] = user.avatar_url
         if user.is_public_organization:
             data_dict['organization'] = user.organization
         return HttpResponse(json.dumps(data_dict))
@@ -44,6 +47,92 @@ def verify_discord_id(request, discord_id):
     try:
         user = Profile.objects.get(discord_id=discord_id)
         return JsonResponse({'Username': user.user.username}, status=200)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)
+
+
+def leaderboard(request):
+    "API for getting leaderboard"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        users = Profile.objects.all().exclude(is_banned=True).exclude(
+            user__is_staff=True).order_by(
+                '-score',
+                'last_completed_time')
+        data_dict = []
+        for user in users[:10]:
+            rank = get_rank(user.user)
+            if user.discord_id:
+                data_dict.append({
+                    'username': user.user.username,
+                    'score': user.score,
+                    'current_level': user.current_level,
+                    'rank': rank,
+                    'discord_id': user.discord_id
+                })
+            else:
+                data_dict.append({
+                    'username': user.user.username,
+                    'current_level': user.current_level,
+                    'score': user.score, 'rank': rank})
+        return HttpResponse(json.dumps(data_dict))
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)
+
+
+def stats(request, discord_id):
+    "API for getting stats"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        user = Profile.objects.get(discord_id=discord_id)
+        data_dict = {}
+        data_dict['username'] = user.user.username
+        data_dict['score'] = user.score
+        data_dict['current_level'] = user.current_level
+        data_dict['stats'] = user.stats
+        data_dict['avatar_url'] = user.avatar_url
+        return HttpResponse(json.dumps(data_dict))
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)
+
+@csrf_exempt
+def ban(request, discord_id, reason):
+    "API for banning user"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        user = Profile.objects.get(discord_id=discord_id)
+        user.is_banned = True
+        user.banned_reason = reason
+        user.save()
+        return HttpResponse(status=200)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)
+
+
+@csrf_exempt
+def unban(request, discord_id):
+    "API for unbanning user"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        user = Profile.objects.get(discord_id=discord_id)
+        user.is_banned = False
+        #user.banned_reason = None
+        user.save()
+        return HttpResponse(status=200)
     except ObjectDoesNotExist:
         return HttpResponse(status=404)
     except Exception as e:
