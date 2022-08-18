@@ -3,6 +3,7 @@ import json
 import os
 from django.http import HttpResponse, JsonResponse
 from accounts.models import Profile
+from hunt.models import EasterEgg
 from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank
 from sentry_sdk import capture_exception
@@ -104,6 +105,7 @@ def stats(request, discord_id):
         capture_exception(e)
         return HttpResponse(status=500)
 
+
 @csrf_exempt
 def ban(request, discord_id, reason):
     "API for banning user"
@@ -130,7 +132,47 @@ def unban(request, discord_id):
     try:
         user = Profile.objects.get(discord_id=discord_id)
         user.is_banned = False
-        #user.banned_reason = None
+        user.save()
+        return HttpResponse(status=200)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    except Exception as e:
+        capture_exception(e)
+        return HttpResponse(status=500)
+
+
+@csrf_exempt
+def easteregg(request, discord_id, egg):
+    "API for easter egg"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    try:
+        user = Profile.objects.get(discord_id=discord_id)
+        try:
+            egg = EasterEgg.objects.get(name=egg)
+            if egg.claimed:
+                return JsonResponse(
+                    {
+                        'code': 'claimed',
+                        'response': "This egg has already been claimed"},
+                    status=200)
+            else:
+                egg.claimed = True
+                egg.save()
+                user.score += egg.score
+                user.save()
+                return JsonResponse(
+                    {
+                        'code': 'success',
+                        'response': "Congrats! You have claimed this egg. Added {} points to your score.".format(egg.score)},
+                    status=200)
+        except ObjectDoesNotExist:
+            return JsonResponse({
+                'code': 'not_found',
+                'response': 'Wrong! Try again!'}, status=200)
+        except Exception as e:
+            capture_exception(e)
+            return HttpResponse(status=500)
         user.save()
         return HttpResponse(status=200)
     except ObjectDoesNotExist:

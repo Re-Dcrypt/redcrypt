@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AnswerAttempt, LevelTracking, Question, AdditionalHint, SampleQuestion
+from .models import AnswerAttempt, LevelTracking, Question, AdditionalHint, SampleQuestion, EasterEgg
 # Register your models here.
 
 
@@ -58,8 +58,18 @@ class SampleQuestionAdmin(admin.ModelAdmin):
     ]
 
 
+class EasterEggAdmin(admin.ModelAdmin):
+    list_display = [
+        'egg',
+        'points',
+        'claimed',
+        'claimed_by',
+    ]
+
+
 admin.site.register(LevelTracking, LevelTrackingAdmin)
 admin.site.register(AnswerAttempt, AnswerAttemptAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(AdditionalHint, AdditionalHintAdmin)
 admin.site.register(SampleQuestion, SampleQuestionAdmin)
+admin.site.register(EasterEgg, EasterEggAdmin)

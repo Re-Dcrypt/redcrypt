@@ -63,3 +63,20 @@ class SampleQuestion(models.Model):
 
     class Meta:
         verbose_name_plural = "Sample Questions"
+
+
+class EasterEgg(models.Model):
+    egg = models.TextField()
+    claimed_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True)
+    points = models.IntegerField(default=0)
+    claimed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.egg)
+
+    class Meta:
+        verbose_name_plural = "Easter Eggs"
