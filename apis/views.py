@@ -173,8 +173,6 @@ def easteregg(request, discord_id, egg):
         except Exception as e:
             capture_exception(e)
             return HttpResponse(status=500)
-        user.save()
-        return HttpResponse(status=200)
     except ObjectDoesNotExist:
         return HttpResponse(status=404)
     except Exception as e:
