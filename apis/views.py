@@ -149,27 +149,27 @@ def easteregg(request, discord_id, egg):
     try:
         user = Profile.objects.get(discord_id=discord_id)
         try:
-            egg = EasterEgg.objects.get(name=egg)
+            egg = EasterEgg.objects.get(egg=egg)
             if egg.claimed:
                 return JsonResponse(
                     {
                         'code': 'claimed',
-                        'response': "This egg has already been claimed"},
-                    status=200)
+                        'response': "This egg has already been claimed"}
+                    )
             else:
                 egg.claimed = True
-                egg.save()
-                user.score += egg.score
+                egg.claimed_by = user.user
+                user.score += egg.points
                 user.save()
+                egg.save()
                 return JsonResponse(
                     {
                         'code': 'success',
-                        'response': "Congrats! You have claimed this egg. Added {} points to your score.".format(egg.score)},
-                    status=200)
+                        'response': f"Congrats! You have claimed this egg. Added {egg.points} points to your score."})
         except ObjectDoesNotExist:
             return JsonResponse({
                 'code': 'not_found',
-                'response': 'Wrong! Try again!'}, status=200)
+                'response': 'Wrong! Try again!'})
         except Exception as e:
             capture_exception(e)
             return HttpResponse(status=500)
