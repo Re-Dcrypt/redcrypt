@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hunt.views import index, offline, play, check_ans, leaderboard, faqs, sample_questions_play, sample_checkans, about, rules
+from hunt.views import index, offline, play, check_ans, leaderboard, rules
+from hunt.views import faqs, sample_questions_play, sample_checkans, about
 from accounts import views as accounts_views
+from allauth1.account.views import password_change
 
 
 urlpatterns = [
@@ -30,6 +32,11 @@ urlpatterns = [
     path(
         'accounts/social/connections/',
         accounts_views.connect, name='connect'),
+    path(
+        "accounts/password/change/",
+        password_change,
+        name="account_change_password",
+    ),
     path('accounts/', include('allauth.urls')),
 
     path('profile/', accounts_views.profile, name='profile'),
