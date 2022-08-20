@@ -31,6 +31,7 @@ class Profile(models.Model):
         default="https://source.boringavatars.com/beam/512/redcrypt?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
     )
     stats = models.JSONField(default=dict, blank=True)
+    rank = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user)
