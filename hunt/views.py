@@ -21,6 +21,9 @@ def offline(request):
     return render(request, 'offline.html')
 
 
+def guidelines(request):
+    return render(request, 'guidelines.html', {'url_name': 'guidelines'})
+
 @hunt_status
 @login_required
 @not_banned
