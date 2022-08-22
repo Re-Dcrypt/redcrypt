@@ -19,9 +19,11 @@ To deploy this project
     `python manage.py collectstatic`
 6.  Load Admin panel customization data
     `python manage.py loaddata data.json`
-7.  Run server
+7. Load extra settings data
+    `python manage.py loaddata extrasettings.json`
+8.  Run server
     `python manage.py runserver`
-8. Visit Admin Panel at:
+9. Visit Admin Panel at:
     http://127.0.0.1:8000/honeypot/
 
 ## Environment Variables
