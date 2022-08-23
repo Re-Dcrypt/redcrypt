@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from hunt.views import index, offline, play, check_ans, leaderboard, rules
-from hunt.views import faqs, sample_questions_play
+from hunt.views import faqs, sample_questions_play, update_rank
 from hunt.views import sample_checkans, about, guidelines
 from accounts import views as accounts_views
 from allauth1.account.views import password_change
@@ -74,6 +74,7 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('check/', check_ans, name='check_ans'),
     path('contact/', accounts_views.contact_form_view, name='contact'),
+    path('update_rank/', update_rank, name='update_rank'),
     path('500/', accounts_views.e500, name='500'),
     path(
         'contact_form_submit',

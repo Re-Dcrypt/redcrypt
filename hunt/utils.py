@@ -17,3 +17,15 @@ def get_rank(user):
         above_players = Profile.objects.filter(score__gt=user_profile.score).exclude(is_banned=True).exclude(user__is_staff=True) | Profile.objects.filter(score=user_profile.score, last_completed_time__lt=user_profile.last_completed_time).exclude(is_banned=True).exclude(user__is_staff=True)
         above = above_players.count()
         return above+1
+
+
+def update_rank_all():
+    for profile in Profile.objects.all():
+        profile.rank = get_rank(profile.user)
+        profile.save()
+
+
+def update_rank(user):
+    user_profile = Profile.objects.get(user=user)
+    user_profile.rank = get_rank(user)
+    user_profile.save()

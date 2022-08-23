@@ -1,4 +1,4 @@
-from email import header
+import threading
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -6,7 +6,7 @@ from hunt.decorators import hunt_status, not_banned
 from hunt.models import AdditionalHint, Question
 from hunt.models import LevelTracking, AnswerAttempt, SampleQuestion
 from accounts.models import Profile
-from hunt.utils import match_answer, get_rank
+from hunt.utils import match_answer, get_rank, update_rank_all
 from sentry_sdk import capture_exception
 import os
 import requests
@@ -23,6 +23,7 @@ def offline(request):
 
 def guidelines(request):
     return render(request, 'guidelines.html', {'url_name': 'guidelines'})
+
 
 @hunt_status
 @login_required
@@ -158,3 +159,13 @@ def sample_checkans(request):
             return JsonResponse({'correct': True}, status=200)
         else:
             return JsonResponse({'correct': False}, status=400)
+
+
+@login_required
+def update_rank(request):
+    if request.user.is_superuser:
+        t = threading.Thread(target=update_rank_all, args=(), kwargs={})
+        t.start()
+        return JsonResponse({'status': "Updating"}, status=200)
+    else:
+        return JsonResponse({'status': "Unauthenticated"}, status=403)
