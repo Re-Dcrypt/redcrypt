@@ -143,3 +143,5 @@ Dockerfile
 okteto.yml
 sync.ffs_db
 url_data.json
+*.env
+url_data.json
