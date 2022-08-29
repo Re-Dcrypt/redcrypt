@@ -4,7 +4,7 @@
 {% block head %}
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 {% endblock %}
 {% block content %}
 <div class="justify-center">
@@ -53,7 +53,7 @@
           <i class='bx bxl-github text-4xl' ></i>
         </a>
       </div>
-    <div class="w-[98%] rounded p-5 mt-11 ml-3 text-nblue bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i>
+    <div data-aos="zoom-in-up" class="w-[98%] rounded p-5 mt-11 ml-3 text-nblue bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i>
       <p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
       <span class="text-5xl">Prizes</span></i>
       <table class="table-auto text-2xl border-collapse border border-nblue mt-5">
@@ -69,6 +69,7 @@
             <td class="border border-nblue p-5">
               <ul class="list-disc list-inside text-lg">
               <li>Taskade Unlimited for Lifetime</li>
+              <li> 1 year <code>.xyz</code> domain</li>
               <li>Certificate of appreciation</li>
               </ul>
             </td>
@@ -78,10 +79,21 @@
             <td class="border border-nblue p-5">
               <ul class="list-disc list-inside text-lg">
               <li>Taskade Unlimited for Lifetime</li>
+              <li> 1 year <code>.xyz</code> domain</li>
               <li>Certificate of participation</li>
               </ul>
             </td>
           </tr>
+          <tr>
+            <td class="border border-nblue p-5">Top 40</td>
+            <td class="border border-nblue p-5">
+              <ul class="list-disc list-inside text-lg">
+              <li>Taskade Unlimited for 5 years</li>
+              <li> 1 year <code>.xyz</code> domain</li>
+              <li>Certificate of participation</li>
+              </ul>
+            </td>
+          </tr>          
           <tr>
             <td class="border border-nblue p-5">Everyone</td>
             <td class="border border-nblue p-5">
@@ -96,7 +108,18 @@
       </table>
     </div> 
     
-    
+    <div data-aos="zoom-in-up" class="w-[98%] rounded p-5 mt-11 ml-3 text-nblue bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i>
+      <p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
+      <span class="text-5xl">Sponsors</span></i>
+      <div class="flex place-content-center">
+        <a href="https://www.taskade.com/">
+          <img src="/sponsors/logo_taskade_white.png" alt="taskade" class="max-h-20 mx-3">
+        </a>
+        <a href="https://gen.xyz/">
+          <img src="/sponsors/xyz-logo-white.svg" alt="gen.xyz" class="max-h-20 mx-3">
+        </a>
+      </div>
+    </div>     
 
 
     </div>
@@ -104,3 +127,9 @@
 
   </div></div>
 {% endblock content %}
+{% block scripts %}
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+  AOS.init();
+</script>
+{% endblock %}
