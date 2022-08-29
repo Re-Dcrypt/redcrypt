@@ -7,9 +7,20 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block head_title %}{% endblock %} |  Re-Dcrypt</title>
-    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Cryptic Hunt">
+    <meta http-equiv="content-language" content="en-IN">
+    <meta name="title" content="Re-Dcrypt 2">
+    <meta name="description" content="A cryptic hunt in which you would face questions in any form. You need to use hints, Google & your out-of-the-box thinking skills to solve it.">
+    <meta name="keywords" content="cryptic hunt, hunt, cryptic, steg, redcrypt">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="DiluteWater">
+    <meta name="theme-color" content="#00d2d2">
+    <meta property="og:title" content="Re-Dcrypt 2">
+    <meta property="og:description" content="A cryptic hunt in which you would face questions in any form. You need to use hints, Google & your out-of-the-box thinking skills to solve it.">
+    <meta property="og:image" content="/icons/maskable_icon_x192.png"/>
+
+
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
     {% progressive_web_app_meta %}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -92,7 +103,19 @@
       popup_heading.popup-button-heading{
         border-top: 1px solid #00d2d2;
       }
-      
+      webpushrwppromptbox2_wrapper{
+        border-width:2px;
+        border-color:#00d2d2;
+      }
+      #webpushr-subscription-button{
+        display: block;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        color: #00d2d2;
+        background-color: transparent;
+      }
     </style>
     <link rel="stylesheet" href="https://static.redcrypt.ml/scrollbar.css">
     {% block head %}{% endblock head %}
@@ -161,7 +184,7 @@
   const options = { color: 'rgb(0, 210, 210)',zIndex: '-1' };
   new Blobity(options);
   {% if user.is_authenticated %}
-  webpushr('attributes',{"username" : user.username});
+  webpushr('attributes',{"username" : "{{user.username}}"});
   {% endif %}
 </script>
 </body>

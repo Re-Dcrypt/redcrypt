@@ -53,6 +53,10 @@
                     Discord connected:</b> <span class="text-white">{{discord}}</span></label>
             </p>
             <hr style="border-top: 2px solid #00D2D2;margin-bottom: 20px;">
+            <div id="webpushr-subscription-button" data-show-subscriber-count="false" data-background-color="#002a2a" data-color="#00d2d2" class="border border-nblue my-5"></div>
+            <br>
+
+
             {% else %}
             <hr style="border-top: 2px solid #00D2D2;margin-bottom: 20px;">
             <form action="{% provider_login_url "discord" process="connect" %}" method="post">

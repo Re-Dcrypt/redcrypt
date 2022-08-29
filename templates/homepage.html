@@ -8,9 +8,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Re-Dcrypt</title>
-    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Cryptic Hunt">
+    <meta http-equiv="content-language" content="en-IN">
+    <meta name="title" content="Re-Dcrypt 2">
+    <meta name="description" content="A cryptic hunt in which you would face questions in any form. You need to use hints, Google & your out-of-the-box thinking skills to solve it.">
+    <meta name="keywords" content="cryptic hunt, hunt, cryptic, steg, redcrypt">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="DiluteWater">
+    <meta name="theme-color" content="#00d2d2">
+    <meta property="og:title" content="Re-Dcrypt 2">
+    <meta property="og:description" content="A cryptic hunt in which you would face questions in any form. You need to use hints, Google & your out-of-the-box thinking skills to solve it.">
+    <meta property="og:image" content="/icons/maskable_icon_x192.png"/>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
     {% progressive_web_app_meta %}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -94,7 +103,10 @@
       popup_heading.popup-button-heading{
         border-top: 1px solid #00d2d2;
       }
-            
+      webpushrwppromptbox2_wrapper{
+        border-width:2px;
+        border-color:#00d2d2;
+      }            
     </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
@@ -205,7 +217,7 @@
         
     </div>
     <div data-aos="zoom-in-up" class="rounded lg:w-3/4 md:w-3/4 w-[98%] p-5 mt-11 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 bg-color-nblue-700 border border-nblue mb-10" style="background-color: rgba(0, 42, 42, .6);"><i><p tabindex="0" class="text-nblue focus:outline-none text-2xl font-extrabold leading-6">
-      <span class="text-5xl">2nd & 3rd October</span><br>Re-Dcrypt cryptic hunt <br>Are you one who can solve the cryptic clues? <br> 
+      <span class="text-5xl">2nd & 3rd October</span><br>Re-Dcrypt cryptic hunt <br>Are you one who can solve the cryptic questions? <br> 
       <br>
       <button class="mt-5 bg-nblue-800 hover:bg-nblue-500 hover:text-black border border-nblue hover:border-black text-nblue font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href={% url 'rules' %}">
         Rules
@@ -284,10 +296,10 @@
       <span class="text-5xl">Sponsors</span></i>
       <div class="flex place-content-center">
       <a href="https://www.taskade.com/">
-        <img src="/sponsors/logo_taskade_white.png" alt="taskade" class="h-24 mx-3">
+        <img src="/sponsors/logo_taskade_white.png" alt="taskade" class="max-h-20 mx-3">
       </a>
       <a href="https://gen.xyz/">
-        <img src="/sponsors/xyz-logo-white.svg" alt="gen.xyz" class="h-24 mx-3">
+        <img src="/sponsors/xyz-logo-white.svg" alt="gen.xyz" class="max-h-20 mx-3">
       </a>
     </div></div>    
 
@@ -348,7 +360,7 @@
   const options = { color: 'rgb(0, 210, 210)',zIndex: '-1' };
   new Blobity(options);
   {% if user.is_authenticated %}
-  webpushr('attributes',{"username" : user.username});
+  webpushr('attributes',{"username" : "{{user.username}}"});
   {% endif %}
 </script>
 </body>

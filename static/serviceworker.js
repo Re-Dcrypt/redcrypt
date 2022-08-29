@@ -1,16 +1,15 @@
 var staticCacheName = "redcrypt_pwa" + new Date().getTime();
 var filesToCache = [
     '/offline',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png',
+    '/icons/maskable_icon_x192.png',
+    '/icons/maskable_icon_x512.png',
     '/offline.svg',
     '/logo_banner.svg',
-    '/bg.svg',
-    'scene.glb',
     '/',
+    '/bg.svg',
     '/about',
     '/rules/',
-    'faqs/'
+    '/faqs/',
 ];
 
 // Cache on install
