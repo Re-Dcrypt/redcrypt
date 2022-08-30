@@ -5,11 +5,8 @@ var filesToCache = [
     '/icons/maskable_icon_x512.png',
     '/offline.svg',
     '/logo_banner.svg',
-    '/',
     '/bg.svg',
-    '/about/',
-    '/rules/',
-    '/faqs/',
+    '/scene.glb',
 ];
 
 // Cache on install
