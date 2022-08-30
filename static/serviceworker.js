@@ -7,7 +7,7 @@ var filesToCache = [
     '/logo_banner.svg',
     '/',
     '/bg.svg',
-    '/about',
+    '/about/',
     '/rules/',
     '/faqs/',
 ];
