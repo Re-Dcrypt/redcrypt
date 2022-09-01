@@ -32,7 +32,7 @@ SECRET_KEY = "django-insecure-p6pm-#vvtm9z0we_%98c-ji9qb$t)mqq7px3-mi+jg+yi9"
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1', 'https://redcrypt.rachitkhurana.repl.co','https://*.redcrypt.xyz/']
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
