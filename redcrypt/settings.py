@@ -217,10 +217,14 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 HCAPTCHA_SITEKEY = os.getenv('HCAPTCHA_SITEKEY')
 HCAPTCHA_SECRET = os.getenv('HCAPTCHA_SECRET')
 
-if os.getenv("MAINTENANCE_MODE").lower() == "true":
-    MAINTENANCE_MODE = True
-else:
+try:
+    if os.getenv("MAINTENANCE_MODE").lower() == "true":
+        MAINTENANCE_MODE = True
+    else:
+        MAINTENANCE_MODE = False
+except:
     MAINTENANCE_MODE = False
+
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
