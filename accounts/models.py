@@ -89,10 +89,11 @@ def user_signed_up_(request, user, **kwargs):
 
 @receiver(social_account_added)
 def social_account_added_(request, **kwargs):
+    print("here")
     user = request.user
     profile = Profile.objects.get(user=user)
     base_url = os.getenv("BOT_HOST")
     url = f"{base_url}/connect/discord/{user.username}/{profile.discord_id}"
     headers = {"Authorization": os.getenv("API_Authorization")}
     requests.post(url, headers=headers)
-    #print(profile.user, profile.discord_id)
+    print("posted")

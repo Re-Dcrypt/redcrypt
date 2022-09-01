@@ -29,17 +29,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-p6pm-#vvtm9z0we_%98c-ji9qb$t)mqq7px3-mi+jg+yi9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1', 'https://redcrypt.rachitkhurana.repl.co','https://*.redcrypt.xyz/']
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
 
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
+	'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -131,7 +133,7 @@ sentry_sdk.init(
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-SITE_ID = 1
+SITE_ID = 2
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -167,6 +169,7 @@ ACCOUNT_FORMS = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_ADAPTER = "allauth1.adapters.MyAccountAdapter"
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_MAX_EMAIL_ADDRESSES = 1
@@ -213,7 +216,6 @@ DEFAULT_FROM_EMAIL = "Re-Dcrypt <admin@redcrypt.ml>"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Re-Dcrypt - "
 ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 600
 SOCIALACCOUNT_AUTO_SIGNUP = False
-
 HCAPTCHA_SITEKEY = os.getenv('HCAPTCHA_SITEKEY')
 HCAPTCHA_SECRET = os.getenv('HCAPTCHA_SECRET')
 
