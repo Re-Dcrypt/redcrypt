@@ -145,3 +145,7 @@ sync.ffs_db
 url_data.json
 *.env
 url_data.json
+.replit
+replit.nix
+poetry.lock
+pyproject.toml
