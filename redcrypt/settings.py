@@ -32,7 +32,11 @@ SECRET_KEY = "django-insecure-p6pm-#vvtm9z0we_%98c-ji9qb$t)mqq7px3-mi+jg+yi9"
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*.rachitkhurana.xyz', 'https://*.127.0.0.1', 'https://redcrypt.rachitkhurana.repl.co','https://*.redcrypt.xyz/']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.rachitkhurana.xyz',
+    'https://*.127.0.0.1',
+    'https://redcrypt.rachitkhurana.repl.co',
+    'https://*.redcrypt.xyz/']
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
@@ -40,7 +44,7 @@ INTERNAL_IPS = [
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,7 +52,7 @@ INSTALLED_APPS = [
     'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
-	'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

@@ -44,9 +44,15 @@
                         <li>
                           <div id='install'>
                             <button type="submit" id="installapp" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black w-full ">Install App</button>
-
-                        </div>
+                          </div>
                       </li>
+                      {% if user.is_superuser %}
+                      <li>
+                        <a href="{% url 'update_rank' %}" class="block px-4 py-2 text-nblue hover:bg-nblue-500 hover:text-black w-full">
+                          <center>Update Ranks</center>
+                      </a>
+                      </li>
+                      {% endif %}
                     </ul>
                 </nav>
             </div>
