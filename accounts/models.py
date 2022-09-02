@@ -5,6 +5,7 @@ from allauth.account.signals import user_signed_up
 from allauth.socialaccount.signals import social_account_added
 import requests
 from django.dispatch import receiver
+from allauth.socialaccount.models import SocialAccount
 import requests
 import os
 from dotenv import load_dotenv
@@ -89,6 +90,11 @@ def user_signed_up_(request, user, **kwargs):
 
 @receiver(social_account_added)
 def social_account_added_(request, **kwargs):
+    profile = Profile.objects.get(user=request.user)
+    sa = SocialAccount.objects.get(user=request.user)
+    profile.discord_id = sa.uid
+    profile.avatar_url = sa.get_avatar_url()
+    profile.save()
     print("here")
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -96,4 +102,3 @@ def social_account_added_(request, **kwargs):
     url = f"{base_url}/connect/discord/{user.username}/{profile.discord_id}"
     headers = {"Authorization": os.getenv("API_Authorization")}
     requests.post(url, headers=headers)
-    print("posted")
