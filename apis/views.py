@@ -184,9 +184,8 @@ def easteregg(request, discord_id, egg):
 @csrf_exempt
 def update_rank(request):
     "API for updating rank"
-    print(request.headers.get('Authorization')+"=="+os.getenv('API_Authorization'))
     if request.headers.get('Authorization') != os.getenv('API_Authorization'):
         return HttpResponse(status=403)
-    t = threading.Thread(target=update_rank_all, args=(), kwargs={})
+    t = threading.Thread(target=update_rank_all)
     t.start()
     return JsonResponse({'status': "Updating"}, status=200)
