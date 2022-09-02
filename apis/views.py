@@ -1,11 +1,12 @@
 "All url views for Bot API"
 import json
 import os
+import threading
 from django.http import HttpResponse, JsonResponse
 from accounts.models import Profile
 from hunt.models import EasterEgg
 from django.core.exceptions import ObjectDoesNotExist
-from hunt.utils import get_rank
+from hunt.utils import get_rank, update_rank_all
 from sentry_sdk import capture_exception
 from django.views.decorators.csrf import csrf_exempt
 
@@ -178,3 +179,12 @@ def easteregg(request, discord_id, egg):
     except Exception as e:
         capture_exception(e)
         return HttpResponse(status=500)
+
+
+def update_rank(request):
+    "API for updating rank"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    t = threading.Thread(target=update_rank_all, args=(), kwargs={})
+    t.start()
+    return JsonResponse({'status': "Updating"}, status=200)
