@@ -169,7 +169,7 @@ ACCOUNT_FORMS = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_ADAPTER = "allauth1.adapters.MyAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "allauth1.socialaccount.adapter.MyAccountAdapter"
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_MAX_EMAIL_ADDRESSES = 1
