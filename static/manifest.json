@@ -8,6 +8,7 @@
     "orientation": "any",
     "background_color": "#002a2a",
     "theme_color": "#00d2d2",
+	"orientation": "portrait-primary",
     "shortcuts": [
         {
           "name": "Play Re-Dcrypt",

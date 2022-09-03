@@ -1,6 +1,12 @@
 import re
+import pyminizip
 from accounts.models import Profile
+from os import getenv
+from dotenv import load_dotenv
+from pathlib import Path
 
+
+load_dotenv()
 
 def match_answer(actual_answer, submitted_answer):
     submitted_answer_filtered = re.sub('[\W_]+', '', submitted_answer.lower().replace(' ', '').strip())
@@ -29,3 +35,14 @@ def update_rank(user):
     user_profile = Profile.objects.get(user=user)
     user_profile.rank = get_rank(user)
     user_profile.save()
+
+
+def backup_db():
+	inpt = "db.sqlite3"
+	oupt = "db.zip"
+	pyminizip.compress(
+		inpt,
+		None,
+		oupt,
+        "brownsugar",1)
+	
