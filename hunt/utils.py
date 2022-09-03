@@ -44,7 +44,7 @@ def backup_db():
 		None,
 		oupt,
         pwd,1)
-	webhook = DiscordWebhook(url=webhook_url, username="Re-Dcrypt Backup")
+	webhook = DiscordWebhook(url=webhook_url, rate_limit_retry=True)
 	with open("db.zip", "rb") as f:
-	    webhook.add_file(file=f.read(), filename='example.jpg')	
+	    webhook.add_file(file=f.read(), filename='db.zip')	
 	webhook.execute()
