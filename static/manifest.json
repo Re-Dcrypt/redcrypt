@@ -5,7 +5,6 @@
     "start_url": "/",
     "display": "standalone",
     "scope": "/",
-    "orientation": "any",
     "background_color": "#002a2a",
     "theme_color": "#00d2d2",
 	"orientation": "portrait-primary",
@@ -38,22 +37,27 @@
         {
             "src": "/pic1.png",
             "type": "image/png",
-            "sizes": "911x1620"
+            "sizes": "910x1618"
         },
         {
             "src": "/pic2.png",
             "type": "image/png",
-            "sizes": "911x1620"
+            "sizes": "910x1618"
         },
         {
             "src": "/pic3.png",
             "type": "image/png",
-            "sizes": "911x1620"
+            "sizes": "910x1618"
         },
         {
             "src": "/pic4.png",
             "type": "image/png",
-            "sizes": "911x1620"
-        }
+            "sizes": "910x1618"
+        },
+        {
+            "src": "/pic5.png",
+            "type": "image/png",
+            "sizes": "910x1618"
+        }        
     ]
 }
