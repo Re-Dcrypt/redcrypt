@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from accounts.models import Profile
 from hunt.models import EasterEgg
 from django.core.exceptions import ObjectDoesNotExist
-from hunt.utils import get_rank, update_rank_all
+from hunt.utils import get_rank, update_rank_all, backup_db
 from sentry_sdk import capture_exception
 from django.views.decorators.csrf import csrf_exempt
 
@@ -189,3 +189,13 @@ def update_rank(request):
     t = threading.Thread(target=update_rank_all)
     t.start()
     return JsonResponse({'status': "Updating"}, status=200)
+
+
+@csrf_exempt
+def backup(request):
+    "API for backing up database"
+    if request.headers.get('Authorization') != os.getenv('API_Authorization'):
+        return HttpResponse(status=403)
+    t = threading.Thread(target=backup_db)
+    t.start()
+    return JsonResponse({'status': "Backing up"}, status=200)
