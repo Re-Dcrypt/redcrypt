@@ -1,12 +1,9 @@
 import re
 import pyminizip
+import os
 from accounts.models import Profile
-from os import getenv
-from dotenv import load_dotenv
-from pathlib import Path
+from discord_webhook import DiscordWebhook
 
-
-load_dotenv()
 
 def match_answer(actual_answer, submitted_answer):
     submitted_answer_filtered = re.sub('[\W_]+', '', submitted_answer.lower().replace(' ', '').strip())
@@ -40,9 +37,14 @@ def update_rank(user):
 def backup_db():
 	inpt = "db.sqlite3"
 	oupt = "db.zip"
+	pwd = os.getenv('PWD')
+	webhook_url = os.getenv('Discord_backup_webhook')
 	pyminizip.compress(
 		inpt,
 		None,
 		oupt,
-        "brownsugar",1)
-	
+        pwd,1)
+	webhook = DiscordWebhook(url=webhook_url, username="Re-Dcrypt Backup")
+	with open("db.zip", "rb") as f:
+	    webhook.add_file(file=f.read(), filename='example.jpg')	
+	webhook.execute()

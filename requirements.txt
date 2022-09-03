@@ -12,3 +12,5 @@ django-maintenance-mode==0.16.3
 django-debug-toolbar==3.5.0
 django-pwa==1.0.10
 django-admin-interface==0.20.0
+pyminizip
+discord-webhook
