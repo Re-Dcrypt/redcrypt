@@ -37,7 +37,8 @@ def update_rank(user):
 def backup_db():
 	inpt = "db.sqlite3"
 	oupt = "db.zip"
-	pwd = os.getenv('PWD')
+	pwd = os.getenv('PWD_zip')
+	print(pwd)
 	webhook_url = os.getenv('Discord_backup_webhook')
 	pyminizip.compress(
 		inpt,
