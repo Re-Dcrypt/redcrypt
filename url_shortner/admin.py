@@ -8,6 +8,7 @@ class UrlShortnerAdmin(admin.ModelAdmin):
         'short_url',
         'full_url',
         'click_counts',
+        'active',
     ]
     readonly_fields = ['visited_by']
 
