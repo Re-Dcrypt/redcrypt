@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class UrlShortner(models.Model):
+    active = models.BooleanField(default=True)
     short_url = models.CharField(max_length=150, unique=True)
     is_content = models.BooleanField(default=False)
     content = models.CharField(max_length=999999, blank=True, null=True)
