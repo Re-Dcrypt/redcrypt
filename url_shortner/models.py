@@ -8,7 +8,7 @@ class UrlShortner(models.Model):
     active = models.BooleanField(default=True)
     short_url = models.CharField(max_length=150, unique=True)
     is_content = models.BooleanField(default=False)
-    content = models.CharField(max_length=999999, blank=True, null=True)
+    content = models.TextField(max_length=999999, blank=True, null=True)
     full_url = models.CharField(max_length=999999, blank=True, null=True)
     click_counts = models.IntegerField(default=0)
     visited_by = models.ManyToManyField(User, blank=True)
