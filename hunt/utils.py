@@ -4,8 +4,17 @@ import os
 from accounts.models import Profile
 from discord_webhook import DiscordWebhook
 
+def simplify(text):
+	import unicodedata
+	try:
+		text = str(text, 'utf-8')
+	except NameError:
+		pass
+	text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode("utf-8")
+	return str(text)
 
 def match_answer(actual_answer, submitted_answer):
+    submitted_answer = simplify(submitted_answer)
     submitted_answer_filtered = re.sub('[\W_]+', '', submitted_answer.lower().replace(' ', '').strip())
     return submitted_answer_filtered == actual_answer
 
