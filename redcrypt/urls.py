@@ -18,6 +18,7 @@ from django.urls import path, include
 from hunt.views import index, offline, play, check_ans, leaderboard, rules
 from hunt.views import faqs, sample_questions_play, update_rank
 from hunt.views import sample_checkans, about, guidelines
+from hunt.views import privacy_policy, terms_and_conditions
 from accounts import views as accounts_views
 from allauth1.account.views import password_change
 
@@ -72,6 +73,8 @@ urlpatterns = [
     path('rules/', rules, name='rules'),
     path('guidelines/', guidelines, name='guidelines'),
     path('about/', about, name='about'),
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
+    path('terms-and-conditions/', terms_and_conditions, name='terms_and_conditions'),
     path('check/', check_ans, name='check_ans'),
     path('contact/', accounts_views.contact_form_view, name='contact'),
     path('update_rank/', update_rank, name='update_rank'),

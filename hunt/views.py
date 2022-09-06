@@ -119,6 +119,14 @@ def about(request):
     return render(request, 'about.html', {'url_name': 'about'})
 
 
+def terms_and_conditions(request):
+    return render(request, 'terms-and-conditions.html', {'url_name': 'terms_and_conditions'})
+
+
+def privacy_policy(request):
+    return render(request, 'privacy-policy.html', {'url_name': 'privacy_policy'})
+
+
 @login_required
 def sample_questions_play(request):
     user = request.user
