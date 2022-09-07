@@ -208,11 +208,13 @@ def start_hunt(request):
     "API for starting hunt"
     if request.headers.get('Authorization') != os.getenv('API_CRON'):
         return HttpResponse(status=403)
-    setting_obj = Setting(
+    """setting_obj = Setting(
         name="HUNT_STATUS",
         value_type=Setting.TYPE_STRING,
         value="not started",
-    )
+        description="<'active', 'not started', 'paused', 'ended'>",
+    )"""
+    setting_obj = Setting.objects.get(name="HUNT_STATUS")
     setting_obj.value = "active"
     setting_obj.save()
     return JsonResponse({'status': "Hunt Active"}, status=200)
@@ -223,11 +225,13 @@ def end_hunt(request):
     "API for ending hunt"
     if request.headers.get('Authorization') != os.getenv('API_CRON'):
         return HttpResponse(status=403)
-    setting_obj = Setting(
+    """setting_obj = Setting(
         name="HUNT_STATUS",
         value_type=Setting.TYPE_STRING,
         value="active",
-    )
+        description="<'active', 'not started', 'paused', 'ended'>",
+    )"""
+    setting_obj = Setting.objects.get(name="HUNT_STATUS")
     setting_obj.value = "ended"
     setting_obj.save()
     return JsonResponse({'status': "Hunt Ended"}, status=200)

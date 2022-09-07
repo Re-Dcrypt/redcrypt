@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import get_profile, verify_discord_id, leaderboard, backup
-from apis.views import stats, ban, unban, easteregg, update_rank
+from apis.views import stats, ban, unban, easteregg, update_rank, start_hunt, end_hunt
 
 urlpatterns = [
     path('profile/<int:discord_id>', get_profile),
@@ -12,4 +12,6 @@ urlpatterns = [
     path('easteregg/<int:discord_id>/<str:egg>', easteregg),
     path('update_rank_all', update_rank),
     path('backup', backup),
+    path('start_hunt', start_hunt),
+    path('end_hunt', end_hunt),
 ]
