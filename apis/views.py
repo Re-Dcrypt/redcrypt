@@ -9,6 +9,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from hunt.utils import get_rank, update_rank_all, backup_db
 from sentry_sdk import capture_exception
 from django.views.decorators.csrf import csrf_exempt
+from extra_settings.models import Setting
+
 
 # Create your views here.
 
@@ -199,3 +201,33 @@ def backup(request):
     t = threading.Thread(target=backup_db)
     t.start()
     return JsonResponse({'status': "Backing up"}, status=200)
+
+
+@csrf_exempt
+def start_hunt(request):
+    "API for starting hunt"
+    if request.headers.get('Authorization') != os.getenv('API_CRON'):
+        return HttpResponse(status=403)
+    setting_obj = Setting(
+        name="HUNT_STATUS",
+        value_type=Setting.TYPE_STRING,
+        value="not started",
+    )
+    setting_obj.value = "active"
+    setting_obj.save()
+    return JsonResponse({'status': "Hunt Active"}, status=200)
+
+
+@csrf_exempt
+def end_hunt(request):
+    "API for ending hunt"
+    if request.headers.get('Authorization') != os.getenv('API_CRON'):
+        return HttpResponse(status=403)
+    setting_obj = Setting(
+        name="HUNT_STATUS",
+        value_type=Setting.TYPE_STRING,
+        value="active",
+    )
+    setting_obj.value = "ended"
+    setting_obj.save()
+    return JsonResponse({'status': "Hunt Ended"}, status=200)
