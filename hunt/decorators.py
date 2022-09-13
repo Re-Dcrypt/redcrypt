@@ -5,6 +5,8 @@ from sentry_sdk import capture_exception
 
 def hunt_status(function):
     def wrap(request, *args, **kwargs):
+        if request.user.is_staff:
+            return function(request, *args, **kwargs)
         try:
             status = Setting.get('HUNT_STATUS', default="not started")
             if status == 'active':
