@@ -393,6 +393,8 @@
           showToast('Re-Dcrypt App may be already installed or could not be installed. Please try again later or contact the admin',2500)
         }
     });
+    $crisp.push(["set", "user:nickname", [""]]);
+    $crisp.push(["set", "user:email", [""]]);    
 {% endif %}
 
 </script>
@@ -405,5 +407,6 @@
   webpushr('attributes',{"username" : "{{user.username}}"});
   {% endif %}
 </script>
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="73cba040-9174-41dd-a9f8-77bbd9c90366";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 </body>
 </html>
