@@ -93,7 +93,10 @@ def social_account_added_(request, **kwargs):
     profile = Profile.objects.get(user=request.user)
     sa = SocialAccount.objects.get(user=request.user)
     profile.discord_id = sa.uid
-    profile.avatar_url = sa.get_avatar_url()
+    if sa.avatar == None:
+        pass
+    else:
+        profile.avatar_url = sa.get_avatar_url()
     profile.save()
     print("here")
     user = request.user
