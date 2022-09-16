@@ -143,7 +143,7 @@ sentry_sdk.init(
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-SITE_ID = 2
+SITE_ID = 3
 
 AUTH_PASSWORD_VALIDATORS = [
     {
