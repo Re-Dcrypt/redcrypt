@@ -11,6 +11,8 @@ from sentry_sdk import capture_exception
 import os
 import requests
 from datetime import datetime
+import pytz
+
 # Create your views here.
 
 
@@ -67,7 +69,7 @@ def check_ans(request):
         if match_answer(question.answer, answer):
             profile.current_level += 1
             profile.score += question.points
-            profile.last_completed_time = datetime.now()
+            profile.last_completed_time = datetime.now(pytz.timezone('Asia/Kolkata'))
             profile.save()
             try:
                 LevelTracking.objects.create(
