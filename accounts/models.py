@@ -17,7 +17,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, blank=True)
     score = models.IntegerField(default=0)
-    last_completed_time = models.DateTimeField(auto_now=True)
+    last_completed_time = models.DateTimeField()
     is_public_name = models.BooleanField(default=False)
     current_level = models.IntegerField(default=0)
     discord_id = models.IntegerField(default=0)

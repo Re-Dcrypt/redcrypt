@@ -10,6 +10,7 @@ from hunt.utils import match_answer, get_rank, update_rank_all
 from sentry_sdk import capture_exception
 import os
 import requests
+from datetime import datetime
 # Create your views here.
 
 
@@ -66,6 +67,7 @@ def check_ans(request):
         if match_answer(question.answer, answer):
             profile.current_level += 1
             profile.score += question.points
+            profile.last_completed_time = datetime.now()
             profile.save()
             try:
                 LevelTracking.objects.create(
