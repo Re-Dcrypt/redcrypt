@@ -104,4 +104,7 @@ def social_account_added_(request, **kwargs):
     base_url = os.getenv("BOT_HOST")
     url = f"{base_url}/connect/discord/{user.username}/{profile.discord_id}"
     headers = {"Authorization": os.getenv("API_Authorization")}
-    requests.post(url, headers=headers)
+    try:
+        requests.post(url, headers=headers)
+    except:
+        pass
