@@ -47,8 +47,6 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     def reset_profile_pic(self, request, queryset):
-        print(queryset)
-        print(type(queryset))
         for i in queryset:
             i.avatar_url=f"https://source.boringavatars.com/beam/512/{i.user.username}?colors=00D2D2,006D6D,002A2A,055D5D,074848&square"
             i.save()
