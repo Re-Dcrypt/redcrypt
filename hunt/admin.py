@@ -24,6 +24,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = [
         'short_name',
         'level',
+		'points',
     ]
     fieldsets = (
         ('Details',
