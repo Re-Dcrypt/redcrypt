@@ -34,7 +34,7 @@ def guidelines(request):
 def play(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    if profile.current_level > 1:
+    if profile.current_level > 21:
         return render(request, 'complete.html')
     else:
         question = Question.objects.get(level=profile.current_level)
